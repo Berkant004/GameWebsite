@@ -130,17 +130,41 @@
             });
         }
 
-        // Video play button functionality
-        var playButtons = document.querySelectorAll('.play-button');
-        for (var j = 0; j < playButtons.length; j++) {
-            playButtons[j].addEventListener('click', function() {
-                if (supportsES6) {
-                    alert('Video player would open here in a real implementation');
-                } else {
-                    // Fallback for older browsers
-                    window.alert('Video player would open here in a real implementation');
-                }
-            });
+        // Video play button functionality - Updated for direct video control
+        var videoContainers = document.querySelectorAll('.video-container');
+        for (var v = 0; v < videoContainers.length; v++) {
+            var videoContainer = videoContainers[v];
+            var video = videoContainer.querySelector('video');
+            var playButton = videoContainer.querySelector('.play-button');
+
+            if (video && playButton) {
+                // Play button click handler
+                playButton.addEventListener('click', function(e) {
+                    var container = getClosest(e.target, '.video-container');
+                    var vid = container.querySelector('video');
+                    var btn = container.querySelector('.play-button');
+
+                    if (vid.paused) {
+                        vid.play();
+                        addClass(btn, 'hidden'); // Hide play button when video plays
+                    }
+                });
+
+                // Video play handler (in case user uses native controls)
+                video.addEventListener('play', function() {
+                    var container = getClosest(this, '.video-container');
+                    var btn = container.querySelector('.play-button');
+                    addClass(btn, 'hidden'); // Hide play button when video plays
+                });
+
+                // Video pause handler (optional: show play button when paused)
+                video.addEventListener('pause', function() {
+                    var container = getClosest(this, '.video-container');
+                    var btn = container.querySelector('.play-button');
+                    // Remove hidden class when video is paused
+                    // removeClass(btn, 'hidden');
+                });
+            }
         }
 
         // Header scroll effect

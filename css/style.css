@@ -479,6 +479,11 @@ nav a.active {
     transform: translate(-50%, -50%) scale(1.1);
 }
 
+/* Hide play button when video is playing */
+.play-button.hidden {
+    display: none;
+}
+
 /* Screenshots Section */
 .screenshots {
     background: #e9ecef; /* Light gray background */
