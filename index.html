@@ -3,21 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Shadow Realm - Official Game Website</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="assets/images/icon.png" type="image/png">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="assets/images/hero-bg.jpg" as="image">
+
+    <!-- Fallback fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Skip to content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Loading indicator -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
     <!-- Header -->
-    <header>
+    <header role="banner">
         <div class="container">
             <div class="logo">
-                <img src="assets/images/game-logo.png" alt="Shadow Realm Logo" class="game-logo">
+                <img src="assets/images/game-logo.png" alt="Shadow Realm Logo" class="game-logo" loading="lazy">
                 <h1>SHADOW REALM</h1>
             </div>
-            <nav>
+
+            <!-- Mobile menu button -->
+            <button class="mobile-menu-button" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav role="navigation" aria-label="Main navigation">
                 <ul>
-                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="index.html" class="active" aria-current="page">Home</a></li>
                     <li><a href="pages/about.html">About</a></li>
                     <li><a href="pages/gameplay.html">Gameplay</a></li>
                     <li><a href="pages/download.html">Download</a></li>
@@ -27,111 +50,128 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero" role="banner">
+            <div class="hero-content">
+                <div class="container">
+                    <h1>ENTER THE SHADOW REALM</h1>
+                    <p>An epic adventure awaits in a world where darkness and light collide. Master ancient powers, forge your destiny, and become the legend.</p>
+                    <div class="cta-buttons">
+                        <a href="pages/download.html" class="btn-primary">PLAY NOW</a>
+                        <a href="#trailer" class="btn-secondary">WATCH TRAILER</a>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-overlay"></div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features" aria-labelledby="features-heading">
             <div class="container">
-                <h1>ENTER THE SHADOW REALM</h1>
-                <p>An epic adventure awaits in a world where darkness and light collide. Master ancient powers, forge your destiny, and become the legend.</p>
-                <div class="cta-buttons">
-                    <a href="pages/download.html" class="btn-primary">PLAY NOW</a>
-                    <a href="#trailer" class="btn-secondary">WATCH TRAILER</a>
+                <h2 id="features-heading">WHY SHADOW REALM?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">⚔️</div>
+                        <h3>Epic Combat System</h3>
+                        <p>Master fluid combat with customizable weapons and abilities</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">🌍</div>
+                        <h3>Vast Open World</h3>
+                        <p>Explore diverse landscapes filled with secrets and challenges</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">🧙</div>
+                        <h3>Deep Character Progression</h3>
+                        <p>Customize your hero with countless skills and equipment options</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">👥</div>
+                        <h3>Multiplayer Co-op</h3>
+                        <p>Team up with friends in epic cooperative adventures</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="hero-overlay"></div>
-    </section>
+        </section>
 
-    <!-- Features Section -->
-    <section class="features">
-        <div class="container">
-            <h2>WHY SHADOW REALM?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">⚔️</div>
-                    <h3>Epic Combat System</h3>
-                    <p>Master fluid combat with customizable weapons and abilities</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌍</div>
-                    <h3>Vast Open World</h3>
-                    <p>Explore diverse landscapes filled with secrets and challenges</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🧙</div>
-                    <h3>Deep Character Progression</h3>
-                    <p>Customize your hero with countless skills and equipment options</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👥</div>
-                    <h3>Multiplayer Co-op</h3>
-                    <p>Team up with friends in epic cooperative adventures</p>
+        <!-- Trailer Section -->
+        <section class="trailer" id="trailer" aria-labelledby="trailer-heading">
+            <div class="container">
+                <h2 id="trailer-heading">GAME TRAILER</h2>
+                <div class="video-container">
+                    <img src="assets/images/screenshot1.jpg" alt="Game Trailer Preview" class="video-placeholder" loading="lazy">
+                    <button class="play-button" aria-label="Play trailer video">▶️</button>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Trailer Section -->
-    <section class="trailer" id="trailer">
-        <div class="container">
-            <h2>GAME TRAILER</h2>
-            <div class="video-container">
-                <img src="assets/images/screenshot1.jpg" alt="Game Trailer" class="video-placeholder">
-                <div class="play-button">▶️</div>
+        <!-- Screenshots Section -->
+        <section class="screenshots" aria-labelledby="gallery-heading">
+            <div class="container">
+                <h2 id="gallery-heading">GALLERY</h2>
+                <div class="screenshot-scroll-container" role="region" aria-label="Game screenshots" tabindex="0">
+                    <div class="screenshot-scroll-wrapper">
+                        <div class="screenshot-item">
+                            <img src="assets/images/screenshot1.jpg" alt="Game Screenshot 1" loading="lazy">
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="assets/images/screenshot2.jpg" alt="Game Screenshot 2" loading="lazy">
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="assets/images/screenshot1.jpg" alt="Game Screenshot 3" loading="lazy">
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="assets/images/screenshot2.jpg" alt="Game Screenshot 4" loading="lazy">
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="assets/images/screenshot1.jpg" alt="Game Screenshot 5" loading="lazy">
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="assets/images/screenshot2.jpg" alt="Game Screenshot 6" loading="lazy">
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="assets/images/screenshot1.jpg" alt="Game Screenshot 7" loading="lazy">
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="assets/images/screenshot2.jpg" alt="Game Screenshot 8" loading="lazy">
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Screenshots Section -->
-    <section class="screenshots">
-        <div class="container">
-            <h2>GALLERY</h2>
-            <div class="screenshot-grid">
-                <div class="screenshot-item">
-                    <img src="assets/images/screenshot1.jpg" alt="Game Screenshot 1">
-                </div>
-                <div class="screenshot-item">
-                    <img src="assets/images/screenshot2.jpg" alt="Game Screenshot 2">
-                </div>
-                <div class="screenshot-item">
-                    <img src="assets/images/screenshot1.jpg" alt="Game Screenshot 3">
-                </div>
-                <div class="screenshot-item">
-                    <img src="assets/images/screenshot2.jpg" alt="Game Screenshot 4">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- News Section -->
-    <section class="news">
-        <div class="container">
-            <h2>LATEST NEWS</h2>
-            <div class="news-grid">
-                <div class="news-card">
-                    <div class="news-date">NOV 15, 2024</div>
-                    <h3>New Expansion "Realm of Shadows" Announced</h3>
-                    <p>Discover the mysterious shadow realm with new zones, enemies, and legendary gear.</p>
-                    <a href="#" class="read-more">Read More</a>
-                </div>
-                <div class="news-card">
-                    <div class="news-date">NOV 1, 2024</div>
-                    <h3>Season 3: Battle Pass Now Available</h3>
-                    <p>New seasonal content, exclusive rewards, and challenging missions await!</p>
-                    <a href="#" class="read-more">Read More</a>
-                </div>
-                <div class="news-card">
-                    <div class="news-date">OCT 20, 2024</div>
-                    <h3>Major Update 2.0 Released</h3>
-                    <p>Bug fixes, performance improvements, and new quality of life features.</p>
-                    <a href="#" class="read-more">Read More</a>
+        <!-- News Section -->
+        <section class="news" aria-labelledby="news-heading">
+            <div class="container">
+                <h2 id="news-heading">LATEST NEWS</h2>
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="news-date">NOV 15, 2024</div>
+                        <h3>New Expansion "Realm of Shadows" Announced</h3>
+                        <p>Discover the mysterious shadow realm with new zones, enemies, and legendary gear.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </article>
+                    <article class="news-card">
+                        <div class="news-date">NOV 1, 2024</div>
+                        <h3>Season 3: Battle Pass Now Available</h3>
+                        <p>New seasonal content, exclusive rewards, and challenging missions await!</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </article>
+                    <article class="news-card">
+                        <div class="news-date">OCT 20, 2024</div>
+                        <h3>Major Update 2.0 Released</h3>
+                        <p>Bug fixes, performance improvements, and new quality of life features.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </article>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer>
+    <footer role="contentinfo">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
@@ -150,10 +190,10 @@
                 <div class="footer-section">
                     <h4>Follow Us</h4>
                     <div class="social-links">
-                        <a href="#">Twitter</a>
-                        <a href="#">Facebook</a>
-                        <a href="#">Instagram</a>
-                        <a href="#">YouTube</a>
+                        <a href="#" aria-label="Follow us on Twitter">Twitter</a>
+                        <a href="#" aria-label="Follow us on Facebook">Facebook</a>
+                        <a href="#" aria-label="Follow us on Instagram">Instagram</a>
+                        <a href="#" aria-label="Subscribe on YouTube">YouTube</a>
                     </div>
                 </div>
             </div>

@@ -1,125 +1,285 @@
-// Main JavaScript for the website
-document.addEventListener('DOMContentLoaded', function() {
+// Main JavaScript for the website with cross-browser compatibility
+(function() {
+    'use strict';
 
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+    // Feature detection
+    var supportsES6 = (function() {
+        try {
+            new Function('(a = 0) => a');
+            return true;
+        } catch (err) {
+            return false;
+        }
+    })();
+
+    var supportsIntersectionObserver = 'IntersectionObserver' in window;
+    var supportsSmoothScroll = 'scrollBehavior' in document.documentElement.style;
+
+    // DOM ready function (cross-browser compatible)
+    function domReady(callback) {
+        if (document.readyState === 'loading') {
+            if (document.addEventListener) {
+                document.addEventListener('DOMContentLoaded', callback);
+            } else {
+                // Fallback for older IE
+                document.attachEvent('onreadystatechange', function() {
+                    if (document.readyState === 'complete') {
+                        callback();
+                    }
                 });
             }
-        });
-    });
+        } else {
+            callback();
+        }
+    }
 
-    // Video play button functionality
-    const playButton = document.querySelector('.play-button');
-    if (playButton) {
-        playButton.addEventListener('click', function() {
-            alert('Video player would open here in a real implementation');
-            // In a real site, you would open a modal with the video player
+    // Smooth scrolling function (cross-browser compatible)
+    function smoothScrollTo(target, duration) {
+        if (!supportsSmoothScroll) {
+            // Fallback for older browsers
+            target.scrollIntoView();
+            return;
+        }
+
+        target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
         });
     }
 
-    // Header scroll effect
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(10, 10, 10, 0.98)';
-            header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
-        } else {
-            header.style.background = 'rgba(10, 10, 10, 0.95)';
-            header.style.boxShadow = 'none';
+    // Get closest element (cross-browser compatible)
+    function getClosest(elem, selector) {
+        if (elem.closest) {
+            return elem.closest(selector);
         }
-    });
 
-    // Add hover effects to interactive elements
-    const hoverElements = document.querySelectorAll('.feature-card, .news-card, .screenshot-item');
-    hoverElements.forEach(element => {
-        element.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px)';
-        });
+        // Fallback for older browsers
+        while (elem) {
+            if (elem.matches && elem.matches(selector)) {
+                return elem;
+            }
+            elem = elem.parentElement || elem.parentNode;
+        }
+        return null;
+    }
 
-        element.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
+    // Add class to element (cross-browser compatible)
+    function addClass(element, className) {
+        if (element.classList) {
+            element.classList.add(className);
+        } else {
+            // Fallback for older browsers
+            element.className += ' ' + className;
+        }
+    }
 
-    // Newsletter form submission (if you add one later)
-    const forms = document.querySelectorAll('form');
-    forms.forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Form handling logic would go here
-            alert('Thank you for your interest! (This is a demo site)');
-        });
-    });
+    // Remove class from element (cross-browser compatible)
+    function removeClass(element, className) {
+        if (element.classList) {
+            element.classList.remove(className);
+        } else {
+            // Fallback for older browsers
+            element.className = element.className.replace(
+                new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'),
+                ' '
+            );
+        }
+    }
 
-    // Lazy loading for images
-    const images = document.querySelectorAll('img[data-src]');
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-                observer.unobserve(img);
+    // Toggle class on element (cross-browser compatible)
+    function toggleClass(element, className) {
+        if (element.classList) {
+            element.classList.toggle(className);
+        } else {
+            // Fallback for older browsers
+            var classes = element.className.split(' ');
+            var existingIndex = classes.indexOf(className);
+
+            if (existingIndex >= 0) {
+                classes.splice(existingIndex, 1);
+            } else {
+                classes.push(className);
+            }
+
+            element.className = classes.join(' ');
+        }
+    }
+
+    // Main initialization function
+    function init() {
+        // Close loading overlay
+        var loadingOverlay = document.getElementById('loadingOverlay');
+        if (loadingOverlay) {
+            setTimeout(function() {
+                addClass(loadingOverlay, 'loaded');
+            }, 500);
+        }
+
+        // Smooth scrolling for navigation links
+        var anchorLinks = document.querySelectorAll('a[href^="#"]');
+        for (var i = 0; i < anchorLinks.length; i++) {
+            anchorLinks[i].addEventListener('click', function(e) {
+                e.preventDefault();
+                var targetId = this.getAttribute('href');
+                if (targetId && targetId !== '#') {
+                    var target = document.querySelector(targetId);
+                    if (target) {
+                        smoothScrollTo(target, 800);
+                    }
+                }
+            });
+        }
+
+        // Video play button functionality
+        var playButtons = document.querySelectorAll('.play-button');
+        for (var j = 0; j < playButtons.length; j++) {
+            playButtons[j].addEventListener('click', function() {
+                if (supportsES6) {
+                    alert('Video player would open here in a real implementation');
+                } else {
+                    // Fallback for older browsers
+                    window.alert('Video player would open here in a real implementation');
+                }
+            });
+        }
+
+        // Header scroll effect
+        function handleHeaderScroll() {
+            var header = document.querySelector('header');
+            if (header) {
+                if (window.scrollY > 100) {
+                    addClass(header, 'scrolled');
+                } else {
+                    removeClass(header, 'scrolled');
+                }
+            }
+        }
+
+        if (window.addEventListener) {
+            window.addEventListener('scroll', handleHeaderScroll);
+        } else {
+            // Fallback for older browsers
+            window.attachEvent('onscroll', handleHeaderScroll);
+        }
+
+        // Add hover effects to interactive elements (touch-friendly)
+        var hoverElements = document.querySelectorAll('.feature-card, .news-card, .screenshot-item');
+        for (var k = 0; k < hoverElements.length; k++) {
+            hoverElements[k].addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+
+            hoverElements[k].addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        }
+
+        // Mobile menu toggle
+        var mobileMenuButton = document.querySelector('.mobile-menu-button');
+        var navMenu = document.querySelector('nav ul');
+
+        if (mobileMenuButton && navMenu) {
+            mobileMenuButton.addEventListener('click', function() {
+                toggleClass(navMenu, 'active');
+                var isExpanded = navMenu.classList.contains('active');
+                mobileMenuButton.setAttribute('aria-expanded', isExpanded);
+            });
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (navMenu && navMenu.classList.contains('active')) {
+                var isClickInsideNav = getClosest(e.target, 'nav') !== null;
+                var isClickOnMenuButton = e.target === mobileMenuButton;
+
+                if (!isClickInsideNav && !isClickOnMenuButton) {
+                    removeClass(navMenu, 'active');
+                    if (mobileMenuButton) {
+                        mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    }
+                }
             }
         });
-    });
 
-    images.forEach(img => imageObserver.observe(img));
+        // Lazy loading for images (with fallback)
+        if (supportsIntersectionObserver) {
+            var images = document.querySelectorAll('img[loading="lazy"]');
+            var imageObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        var img = entry.target;
+                        observer.unobserve(img);
+                    }
+                });
+            });
 
-    // Mobile menu toggle (if you add one)
-    const mobileMenuButton = document.querySelector('.mobile-menu-button');
-    const navMenu = document.querySelector('nav ul');
+            images.forEach(function(img) {
+                imageObserver.observe(img);
+            });
+        }
 
-    if (mobileMenuButton) {
-        mobileMenuButton.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
+        // Form submission handling
+        var forms = document.querySelectorAll('form');
+        for (var l = 0; l < forms.length; l++) {
+            forms[l].addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (supportsES6) {
+                    alert('Thank you for your interest! (This is a demo site)');
+                } else {
+                    window.alert('Thank you for your interest! (This is a demo site)');
+                }
+            });
+        }
+
+        // Modal functions (if needed in future)
+        window.openModal = function(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        };
+
+        window.closeModal = function(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        };
+
+        // Close modals when clicking outside
+        document.addEventListener('click', function(event) {
+            var modals = document.querySelectorAll('.modal');
+            for (var m = 0; m < modals.length; m++) {
+                if (event.target === modals[m]) {
+                    modals[m].style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            }
         });
     }
-});
 
-// Utility functions
-function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-}
+    // Initialize when DOM is ready
+    domReady(init);
 
-function openModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-}
-
-// Close modals when clicking outside
-window.addEventListener('click', function(event) {
-    const modals = document.querySelectorAll('.modal');
-    modals.forEach(modal => {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
+    // Utility functions
+    window.scrollToTop = function() {
+        if (supportsSmoothScroll) {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        } else {
+            // Fallback for older browsers
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
         }
-    });
-});
+    };
 
-// Add loading animation
-window.addEventListener('load', function() {
-    document.body.classList.add('loaded');
-});
+    // Add loaded class to body
+    domReady(function() {
+        addClass(document.body, 'loaded');
+    });
+
+})();
