@@ -437,7 +437,6 @@ nav a.active {
 
 .video-container {
     position: relative;
-    /* Use padding-top trick for 16:9 aspect ratio */
     width: 100%;
     max-width: 800px; /* Maintain your existing max-width */
     margin: 0 auto;
@@ -449,19 +448,16 @@ nav a.active {
     height: 0; /* Height is controlled by padding-top */
 }
 
-.video-placeholder {
-    /* Position the image absolutely within the container */
+.video-container video {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    display: block;
-    object-fit: cover; /* Cover the container while maintaining aspect ratio */
+    object-fit: cover; /* Ensure the video fills the container while maintaining aspect ratio */
 }
 
 .play-button {
-    /* Adjusted positioning for absolute container */
     position: absolute;
     top: 50%;
     left: 50%;
@@ -474,8 +470,7 @@ nav a.active {
     background: none;
     border: none;
     padding: 0;
-    z-index: 1; /* Ensure it's above the image */
-    /* Fallback for older browsers */
+    z-index: 1; /* Ensure it's above the video */
     -webkit-appearance: none;
     appearance: none;
 }
