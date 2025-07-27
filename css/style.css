@@ -153,17 +153,20 @@ header.scrolled {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
 }
 
+/* This is the key section for left/right alignment */
 header .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* This pushes logo left and nav right */
     align-items: center;
     padding: 1rem 20px;
+    width: 100%; /* Ensure full width */
 }
 
 .logo {
     display: flex;
     align-items: center;
     gap: 1rem;
+    margin-right: auto; /* Explicitly push logo to the left */
 }
 
 .game-logo {
@@ -182,12 +185,15 @@ header .container {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-fill-color: transparent;
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
 nav ul {
     display: flex;
     list-style: none;
     gap: 2rem;
+    margin-left: auto; /* Explicitly push nav to the right */
+    margin-bottom: 0; /* Override default ul margin */
 }
 
 nav a {
@@ -200,6 +206,7 @@ nav a {
     font-size: 0.9rem;
     letter-spacing: 1px;
     display: block;
+    white-space: nowrap; /* Prevent link text wrapping */
 }
 
 nav a:hover,
@@ -208,6 +215,57 @@ nav a.active {
     /* Fallback for older browsers */
     background: -webkit-linear-gradient(45deg, #ff6b6b, #4ecdc4);
     background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+}
+
+/* Mobile menu button */
+.mobile-menu-button {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    margin-left: auto; /* Keep button on the right */
+}
+
+.mobile-menu-button span {
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Responsive Design - Mobile adjustments */
+@media (max-width: 768px) {
+    header .container {
+        flex-wrap: wrap; /* Allow items to wrap on small screens */
+    }
+
+    .logo {
+        order: 1; /* Logo first */
+        margin-right: 0;
+    }
+
+    .mobile-menu-button {
+        display: flex;
+        order: 2; /* Menu button second */
+    }
+
+    nav ul {
+        order: 3; /* Navigation last */
+        width: 100%;
+        margin-left: 0;
+        margin-top: 1rem;
+    }
+
+    nav ul {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: flex-start; /* Align links to the left in mobile menu */
+    }
 }
 
 /* Button Styles */
