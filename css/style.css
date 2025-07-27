@@ -170,8 +170,12 @@ header .container {
     margin-right: auto; /* Explicitly push logo to the left */
 }
 
+/* Make the logo image circular */
 .game-logo {
     height: 50px;
+    width: 50px; /* Set explicit width equal to height for perfect circle */
+    object-fit: cover; /* Ensure the image covers the area nicely, maintaining aspect ratio */
+    border-radius: 50%; /* This makes the logo circular */
     /* Fallback for older browsers */
     width: auto;
 }
@@ -433,20 +437,31 @@ nav a.active {
 
 .video-container {
     position: relative;
-    max-width: 800px;
+    /* Use padding-top trick for 16:9 aspect ratio */
+    width: 100%;
+    max-width: 800px; /* Maintain your existing max-width */
     margin: 0 auto;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    /* 16:9 Aspect Ratio = 56.25% height */
+    padding-top: 56.25%; /* 9 / 16 = 0.5625 */
+    height: 0; /* Height is controlled by padding-top */
 }
 
 .video-placeholder {
+    /* Position the image absolutely within the container */
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
+    object-fit: cover; /* Cover the container while maintaining aspect ratio */
 }
 
 .play-button {
+    /* Adjusted positioning for absolute container */
     position: absolute;
     top: 50%;
     left: 50%;
@@ -459,6 +474,7 @@ nav a.active {
     background: none;
     border: none;
     padding: 0;
+    z-index: 1; /* Ensure it's above the image */
     /* Fallback for older browsers */
     -webkit-appearance: none;
     appearance: none;
@@ -510,30 +526,34 @@ nav a.active {
     padding: 10px;
 }
 
+/* Adjust screenshot items for 16:9 aspect ratio */
 .screenshot-item {
     display: inline-block;
     flex: 0 0 auto;
+    /* Use fixed width and calculate height for 16:9 */
     width: 300px;
-    height: 200px;
+    /* 16:9 height = width * 0.5625 */
+    height: 168.75px; /* 300 * 0.5625 */
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     /* Fallback for older browsers */
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
     background: white;
+    position: relative; /* Needed for absolutely positioned image */
 }
 
 .screenshot-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .screenshot-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Cover the container while maintaining aspect ratio */
     display: block;
 }
 
@@ -697,9 +717,10 @@ footer {
         gap: 15px;
     }
 
+    /* Adjust screenshot items for smaller screens */
     .screenshot-item {
         width: 250px;
-        height: 160px;
+        height: 140.625px; /* 250 * 0.5625 */
     }
 
     /* Mobile menu */
@@ -737,9 +758,10 @@ footer {
         font-size: 1rem;
     }
 
+    /* Adjust screenshot items for even smaller screens */
     .screenshot-item {
         width: 200px;
-        height: 130px;
+        height: 112.5px; /* 200 * 0.5625 */
     }
 
     .btn-primary,
@@ -762,6 +784,15 @@ footer {
     .hero-content h1 {
         font-size: 5rem;
     }
+
+    /* You might want to adjust screenshot item sizes on very large screens */
+    /* For example, if you increase the width, adjust height accordingly */
+    /*
+    .screenshot-item {
+        width: 350px;
+        height: 196.875px; // 350 * 0.5625
+    }
+    */
 }
 
 /* Animations */
@@ -770,6 +801,7 @@ footer {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -781,14 +813,27 @@ footer {
     animation: fadeInUp 0.6s ease forwards;
 }
 
-.feature-card:nth-child(1) { animation-delay: 0.1s; }
-.feature-card:nth-child(2) { animation-delay: 0.2s; }
-.feature-card:nth-child(3) { animation-delay: 0.3s; }
-.feature-card:nth-child(4) { animation-delay: 0.4s; }
+.feature-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.feature-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.feature-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.feature-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
 
 /* Print styles */
 @media print {
-    header, footer {
+
+    header,
+    footer {
         display: none;
     }
 
