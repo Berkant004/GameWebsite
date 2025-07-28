@@ -21,6 +21,15 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* Apply Luckiest Guy to headings */
+h1, h2, h3, h4 {
+    font-family: 'Luckiest Guy', cursive;
+    font-weight: 400; /* Luckiest Guy only has one weight */
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+
 /* Accessibility: Skip link */
 .skip-link {
     position: absolute;
