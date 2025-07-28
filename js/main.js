@@ -1,309 +1,307 @@
-// Main JavaScript for the website with cross-browser compatibility
-(function() {
+// ✅ Shadow Realm - Elite Animation Engine v2.0
+// AAA-tier animations: cinematic, smooth, performant
+// No dependencies — pure vanilla JS + CSS
+(function () {
     'use strict';
 
-    // Feature detection
-    var supportsES6 = (function() {
-        try {
-            new Function('(a = 0) => a');
-            return true;
-        } catch (err) {
-            return false;
-        }
-    })();
-
-    var supportsIntersectionObserver = 'IntersectionObserver' in window;
-    var supportsSmoothScroll = 'scrollBehavior' in document.documentElement.style;
-
-    // DOM ready function (cross-browser compatible)
+    // === Utility Functions (Cross-Browser Safe) ===
     function domReady(callback) {
         if (document.readyState === 'loading') {
-            if (document.addEventListener) {
-                document.addEventListener('DOMContentLoaded', callback);
-            } else {
-                // Fallback for older IE
-                document.attachEvent('onreadystatechange', function() {
-                    if (document.readyState === 'complete') {
-                        callback();
-                    }
-                });
-            }
+            document.addEventListener('DOMContentLoaded', callback);
         } else {
             callback();
         }
     }
 
-    // Smooth scrolling function (cross-browser compatible)
-    function smoothScrollTo(target, duration) {
-        if (!supportsSmoothScroll) {
-            // Fallback for older browsers
-            target.scrollIntoView();
-            return;
-        }
-
-        target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
+    function addClass(el, cls) {
+        if (el.classList) el.classList.add(cls);
+        else el.className += ' ' + cls;
     }
 
-    // Get closest element (cross-browser compatible)
-    function getClosest(elem, selector) {
-        if (elem.closest) {
-            return elem.closest(selector);
-        }
+    function removeClass(el, cls) {
+        if (el.classList) el.classList.remove(cls);
+        else el.className = el.className.replace(new RegExp('(^|\\b)' + cls.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+    }
 
-        // Fallback for older browsers
-        while (elem) {
-            if (elem.matches && elem.matches(selector)) {
-                return elem;
-            }
-            elem = elem.parentElement || elem.parentNode;
+    function hasClass(el, cls) {
+        return el.classList ? el.classList.contains(cls) : new RegExp('(^| )' + cls + '( |$)', 'gi').test(el.className);
+    }
+
+    function getClosest(el, selector) {
+        while (el) {
+            if (el.matches && el.matches(selector)) return el;
+            el = el.parentElement;
         }
         return null;
     }
 
-    // Add class to element (cross-browser compatible)
-    function addClass(element, className) {
-        if (element.classList) {
-            element.classList.add(className);
+    // === Smooth Scroll (with fallback) ===
+    function smoothScrollTo(target) {
+        if ('scrollBehavior' in document.documentElement.style) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } else {
-            // Fallback for older browsers
-            element.className += ' ' + className;
+            window.scrollTo(0, target.offsetTop);
         }
     }
 
-    // Remove class from element (cross-browser compatible)
-    function removeClass(element, className) {
-        if (element.classList) {
-            element.classList.remove(className);
-        } else {
-            // Fallback for older browsers
-            element.className = element.className.replace(
-                new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'),
-                ' '
-            );
-        }
-    }
+    // === Loading Overlay Fade (with minimum duration) ===
+    function initLoading() {
+        const overlay = document.getElementById('loadingOverlay');
+        if (!overlay) return;
 
-    // Toggle class on element (cross-browser compatible)
-    function toggleClass(element, className) {
-        if (element.classList) {
-            element.classList.toggle(className);
-        } else {
-            // Fallback for older browsers
-            var classes = element.className.split(' ');
-            var existingIndex = classes.indexOf(className);
+        // Ensure minimum 800ms visibility for smooth effect
+        const minDuration = 800;
+        const start = Date.now();
 
-            if (existingIndex >= 0) {
-                classes.splice(existingIndex, 1);
-            } else {
-                classes.push(className);
-            }
-
-            element.className = classes.join(' ');
-        }
-    }
-
-    // Main initialization function
-    function init() {
-        // Close loading overlay
-        var loadingOverlay = document.getElementById('loadingOverlay');
-        if (loadingOverlay) {
-            setTimeout(function() {
-                addClass(loadingOverlay, 'loaded');
-            }, 500);
-        }
-
-        // Smooth scrolling for navigation links
-        var anchorLinks = document.querySelectorAll('a[href^="#"]');
-        for (var i = 0; i < anchorLinks.length; i++) {
-            anchorLinks[i].addEventListener('click', function(e) {
-                e.preventDefault();
-                var targetId = this.getAttribute('href');
-                if (targetId && targetId !== '#') {
-                    var target = document.querySelector(targetId);
-                    if (target) {
-                        smoothScrollTo(target, 800);
-                    }
-                }
-            });
-        }
-
-        // Video play button functionality - Updated for direct video control
-        var videoContainers = document.querySelectorAll('.video-container');
-        for (var v = 0; v < videoContainers.length; v++) {
-            var videoContainer = videoContainers[v];
-            var video = videoContainer.querySelector('video');
-            var playButton = videoContainer.querySelector('.play-button');
-
-            if (video && playButton) {
-                // Play button click handler
-                playButton.addEventListener('click', function(e) {
-                    var container = getClosest(e.target, '.video-container');
-                    var vid = container.querySelector('video');
-                    var btn = container.querySelector('.play-button');
-
-                    if (vid.paused) {
-                        vid.play();
-                        addClass(btn, 'hidden'); // Hide play button when video plays
-                    }
-                });
-
-                // Video play handler (in case user uses native controls)
-                video.addEventListener('play', function() {
-                    var container = getClosest(this, '.video-container');
-                    var btn = container.querySelector('.play-button');
-                    addClass(btn, 'hidden'); // Hide play button when video plays
-                });
-
-                // Video pause handler (optional: show play button when paused)
-                video.addEventListener('pause', function() {
-                    var container = getClosest(this, '.video-container');
-                    var btn = container.querySelector('.play-button');
-                    // Remove hidden class when video is paused
-                    // removeClass(btn, 'hidden');
-                });
-            }
-        }
-
-        // Header scroll effect
-        function handleHeaderScroll() {
-            var header = document.querySelector('header');
-            if (header) {
-                if (window.scrollY > 100) {
-                    addClass(header, 'scrolled');
-                } else {
-                    removeClass(header, 'scrolled');
-                }
-            }
-        }
-
-        if (window.addEventListener) {
-            window.addEventListener('scroll', handleHeaderScroll);
-        } else {
-            // Fallback for older browsers
-            window.attachEvent('onscroll', handleHeaderScroll);
-        }
-
-        // Add hover effects to interactive elements (touch-friendly)
-        var hoverElements = document.querySelectorAll('.feature-card, .news-card, .screenshot-item');
-        for (var k = 0; k < hoverElements.length; k++) {
-            hoverElements[k].addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px)';
-            });
-
-            hoverElements[k].addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-            });
-        }
-
-        // Mobile menu toggle
-        var mobileMenuButton = document.querySelector('.mobile-menu-button');
-        var navMenu = document.querySelector('nav ul');
-
-        if (mobileMenuButton && navMenu) {
-            mobileMenuButton.addEventListener('click', function() {
-                toggleClass(navMenu, 'active');
-                var isExpanded = navMenu.classList.contains('active');
-                mobileMenuButton.setAttribute('aria-expanded', isExpanded);
-            });
-        }
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (navMenu && navMenu.classList.contains('active')) {
-                var isClickInsideNav = getClosest(e.target, 'nav') !== null;
-                var isClickOnMenuButton = e.target === mobileMenuButton;
-
-                if (!isClickInsideNav && !isClickOnMenuButton) {
-                    removeClass(navMenu, 'active');
-                    if (mobileMenuButton) {
-                        mobileMenuButton.setAttribute('aria-expanded', 'false');
-                    }
-                }
-            }
-        });
-
-        // Lazy loading for images (with fallback)
-        if (supportsIntersectionObserver) {
-            var images = document.querySelectorAll('img[loading="lazy"]');
-            var imageObserver = new IntersectionObserver(function(entries, observer) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting) {
-                        var img = entry.target;
-                        observer.unobserve(img);
-                    }
-                });
-            });
-
-            images.forEach(function(img) {
-                imageObserver.observe(img);
-            });
-        }
-
-        // Form submission handling
-        var forms = document.querySelectorAll('form');
-        for (var l = 0; l < forms.length; l++) {
-            forms[l].addEventListener('submit', function(e) {
-                e.preventDefault();
-                if (supportsES6) {
-                    alert('Thank you for your interest! (This is a demo site)');
-                } else {
-                    window.alert('Thank you for your interest! (This is a demo site)');
-                }
-            });
-        }
-
-        // Modal functions (if needed in future)
-        window.openModal = function(modalId) {
-            var modal = document.getElementById(modalId);
-            if (modal) {
-                modal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            }
-        };
-
-        window.closeModal = function(modalId) {
-            var modal = document.getElementById(modalId);
-            if (modal) {
-                modal.style.display = 'none';
+        const finish = () => {
+            const elapsed = Date.now() - start;
+            const remaining = Math.max(0, minDuration - elapsed);
+            setTimeout(() => {
+                addClass(overlay, 'loaded');
                 document.body.style.overflow = 'auto';
-            }
+            }, remaining);
         };
 
-        // Close modals when clicking outside
-        document.addEventListener('click', function(event) {
-            var modals = document.querySelectorAll('.modal');
-            for (var m = 0; m < modals.length; m++) {
-                if (event.target === modals[m]) {
-                    modals[m].style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                }
+        // Hide on load or error
+        if (document.readyState === 'complete') {
+            finish();
+        } else {
+            window.addEventListener('load', finish);
+        }
+    }
+
+    // === Hero Text Reveal (Cinematic Split Animation) ===
+    function initTextReveal() {
+        const heroTitle = document.querySelector('.hero-content h1');
+        if (!heroTitle) return;
+
+        const text = heroTitle.textContent.trim();
+        heroTitle.innerHTML = '';
+
+        // Create span for each word
+        text.split(' ').forEach((word, i) => {
+            const span = document.createElement('span');
+            span.textContent = word + ' ';
+            span.style.opacity = '0';
+            span.style.display = 'inline-block';
+            span.style.transform = 'translateY(40px) skewY(10deg)';
+            span.style.transition = `all 0.5s cubic-bezier(0.2, 0.8, 0.3, 1) ${i * 0.1 + 0.3}s`;
+            heroTitle.appendChild(span);
+        });
+
+        // Reveal after loading
+        setTimeout(() => {
+            const spans = heroTitle.children;
+            for (let span of spans) {
+                span.style.opacity = '1';
+                span.style.transform = 'translateY(0) skewY(0)';
+            }
+        }, 600);
+    }
+
+    // === Staggered Reveal on Scroll (Intersection Observer) ===
+    function initStaggeredReveal() {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const container = entry.target;
+                        const items = container.querySelectorAll('.feature-card, .news-card, .screenshot-item');
+                        items.forEach((item, i) => {
+                            if (!hasClass(item, 'animated')) {
+                                item.style.opacity = '0';
+                                item.style.transform = 'translateY(30px)';
+                                item.style.transition = `opacity 0.6s ease, transform 0.6s ease ${i * 0.08}s`;
+                                setTimeout(() => {
+                                    item.style.opacity = '1';
+                                    item.style.transform = 'translateY(0)';
+                                    addClass(item, 'animated');
+                                }, 50);
+                            }
+                        });
+                        observer.unobserve(container);
+                    }
+                });
+            },
+            { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
+        );
+
+        document.querySelectorAll('.features-grid, .news-grid, .screenshot-scroll-wrapper').forEach((container) => {
+            observer.observe(container);
+        });
+    }
+
+    // === Magnetic Hover (Buttons & Cards) ===
+    function initMagneticHover() {
+        const hoverables = document.querySelectorAll('.btn-primary, .btn-secondary, .feature-card, .news-card, .screenshot-item');
+
+        hoverables.forEach((el) => {
+            el.addEventListener('mousemove', function (e) {
+                const rect = el.getBoundingClientRect();
+                const relX = e.clientX - rect.left - rect.width / 2;
+                const relY = e.clientY - rect.top - rect.height / 2;
+
+                // Subtle magnetic effect
+                const tx = relX * 0.06;
+                const ty = relY * 0.06;
+
+                el.style.transform = `translate(${tx}px, ${ty}px) scale(1.03)`;
+                el.style.zIndex = '10';
+            });
+
+            el.addEventListener('mouseleave', function () {
+                this.style.transform = '';
+                this.style.zIndex = 'auto';
+            });
+        });
+    }
+
+    // === Floating Animation (Logo, Icons) ===
+    function initFloatingElements() {
+        const floats = document.querySelectorAll('.feature-icon, .game-logo, .logo h1, .read-more');
+        floats.forEach((el) => {
+            let animating = false;
+
+            el.addEventListener('mouseenter', () => {
+                if (animating) return;
+                animating = true;
+                el.style.transform = 'scale(1.15) rotate(6deg)';
+                setTimeout(() => { animating = false; }, 200);
+            });
+
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = '';
+            });
+        });
+    }
+
+    // === Auto-Drift Screenshot Carousel ===
+    function initScreenshotDrift() {
+        const wrapper = document.querySelector('.screenshot-scroll-wrapper');
+        if (!wrapper) return;
+
+        let scrollPos = 0;
+        let direction = 1;
+
+        function drift() {
+            scrollPos += direction * 0.4;
+            if (scrollPos > 120) direction = -1;
+            if (scrollPos < -120) direction = 1;
+
+            wrapper.style.transform = `translateX(${scrollPos}px)`;
+            requestAnimationFrame(drift);
+        }
+
+        setTimeout(drift, 2500);
+    }
+
+    // === Enhanced Video Trailer Interaction ===
+    function initTrailerAnimation() {
+        const container = document.querySelector('.video-container');
+        if (!container) return;
+
+        container.style.transition = 'all 0.4s cubic-bezier(0.2, 0.8, 0.3, 1)';
+        container.addEventListener('mouseenter', () => {
+            container.style.transform = 'scale(1.03)';
+            container.style.boxShadow = '0 30px 60px rgba(0,0,0,0.35)';
+        });
+
+        container.addEventListener('mouseleave', () => {
+            container.style.transform = '';
+            container.style.boxShadow = '0 20px 40px rgba(0,0,0,0.1)';
+        });
+    }
+
+    // === Header Scroll Effect (Refined) ===
+    function initHeaderScroll() {
+        const header = document.querySelector('header');
+        if (!header) return;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                addClass(header, 'scrolled');
+            } else {
+                removeClass(header, 'scrolled');
             }
         });
     }
 
-    // Initialize when DOM is ready
-    domReady(init);
+    // === Mobile Menu Toggle ===
+    function initMobileMenu() {
+        const button = document.querySelector('.mobile-menu-button');
+        const nav = document.querySelector('nav ul');
+        if (!button || !nav) return;
 
-    // Utility functions
-    window.scrollToTop = function() {
-        if (supportsSmoothScroll) {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+        button.addEventListener('click', () => {
+            toggleClass(nav, 'active');
+            button.setAttribute('aria-expanded', hasClass(nav, 'active'));
+        });
+
+        document.addEventListener('click', (e) => {
+            if (hasClass(nav, 'active') && !getClosest(e.target, 'nav') && e.target !== button) {
+                removeClass(nav, 'active');
+                button.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
+    // === Smooth Scroll for Anchor Links ===
+    function initSmoothScroll() {
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) smoothScrollTo(target);
             });
-        } else {
-            // Fallback for older browsers
-            document.documentElement.scrollTop = 0;
-            document.body.scrollTop = 0;
-        }
-    };
+        });
+    }
 
-    // Add loaded class to body
-    domReady(function() {
-        addClass(document.body, 'loaded');
-    });
+    // === Video Play Button Logic ===
+    function initVideoControls() {
+        const containers = document.querySelectorAll('.video-container');
+        containers.forEach(container => {
+            const video = container.querySelector('video');
+            const playButton = container.querySelector('.play-button');
+            if (!video || !playButton) return;
+
+            playButton.addEventListener('click', () => {
+                if (video.paused) {
+                    video.play();
+                    addClass(playButton, 'hidden');
+                }
+            });
+
+            video.addEventListener('play', () => {
+                addClass(playButton, 'hidden');
+            });
+
+            video.addEventListener('pause', () => {
+                // Optionally show play button again
+                // removeClass(playButton, 'hidden');
+            });
+        });
+    }
+
+    // === Initialize All Systems ===
+    function init() {
+        initLoading();
+        domReady(() => {
+            setTimeout(() => {
+                initTextReveal();
+                initStaggeredReveal();
+                initMagneticHover();
+                initFloatingElements();
+                initScreenshotDrift();
+                initTrailerAnimation();
+                initHeaderScroll();
+                initMobileMenu();
+                initSmoothScroll();
+                initVideoControls();
+            }, 300);
+        });
+    }
+
+    // Start the engine
+    init();
 
 })();
