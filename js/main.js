@@ -1,307 +1,312 @@
-// ✅ Shadow Realm - Elite Animation Engine v2.0
-// AAA-tier animations: cinematic, smooth, performant
-// No dependencies — pure vanilla JS + CSS
-(function () {
-    'use strict';
+// Loading overlay
+document.addEventListener('DOMContentLoaded', function() {
+    const loadingOverlay = document.getElementById('loadingOverlay');
 
-    // === Utility Functions (Cross-Browser Safe) ===
-    function domReady(callback) {
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', callback);
+    // Hide loading overlay when page is fully loaded
+    window.addEventListener('load', function() {
+        loadingOverlay.classList.add('loaded');
+    });
+
+    // Header scroll effect
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
         } else {
-            callback();
+            header.classList.remove('scrolled');
         }
-    }
+    });
 
-    function addClass(el, cls) {
-        if (el.classList) el.classList.add(cls);
-        else el.className += ' ' + cls;
-    }
+    // Mobile menu toggle
+    const mobileMenuButton = document.querySelector('.mobile-menu-button');
+    const navMenu = document.querySelector('nav ul');
 
-    function removeClass(el, cls) {
-        if (el.classList) el.classList.remove(cls);
-        else el.className = el.className.replace(new RegExp('(^|\\b)' + cls.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
-    }
+    mobileMenuButton.addEventListener('click', function() {
+        const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+        mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+        navMenu.classList.toggle('active');
 
-    function hasClass(el, cls) {
-        return el.classList ? el.classList.contains(cls) : new RegExp('(^| )' + cls + '( |$)', 'gi').test(el.className);
-    }
-
-    function getClosest(el, selector) {
-        while (el) {
-            if (el.matches && el.matches(selector)) return el;
-            el = el.parentElement;
-        }
-        return null;
-    }
-
-    // === Smooth Scroll (with fallback) ===
-    function smoothScrollTo(target) {
-        if ('scrollBehavior' in document.documentElement.style) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Animate hamburger to X
+        const spans = mobileMenuButton.querySelectorAll('span');
+        if (!isExpanded) {
+            spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
         } else {
-            window.scrollTo(0, target.offsetTop);
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
         }
-    }
+    });
 
-    // === Loading Overlay Fade (with minimum duration) ===
-    function initLoading() {
-        const overlay = document.getElementById('loadingOverlay');
-        if (!overlay) return;
+    // Video play button functionality
+    const playButton = document.querySelector('.play-button');
+    const video = document.querySelector('.video-container video');
 
-        // Ensure minimum 800ms visibility for smooth effect
-        const minDuration = 800;
-        const start = Date.now();
+    playButton.addEventListener('click', function() {
+        video.play();
+        playButton.classList.add('hidden');
+    });
 
-        const finish = () => {
-            const elapsed = Date.now() - start;
-            const remaining = Math.max(0, minDuration - elapsed);
-            setTimeout(() => {
-                addClass(overlay, 'loaded');
-                document.body.style.overflow = 'auto';
-            }, remaining);
-        };
+    video.addEventListener('pause', function() {
+        playButton.classList.remove('hidden');
+    });
 
-        // Hide on load or error
-        if (document.readyState === 'complete') {
-            finish();
-        } else {
-            window.addEventListener('load', finish);
-        }
-    }
+    video.addEventListener('play', function() {
+        playButton.classList.add('hidden');
+    });
 
-    // === Hero Text Reveal (Cinematic Split Animation) ===
-    function initTextReveal() {
-        const heroTitle = document.querySelector('.hero-content h1');
-        if (!heroTitle) return;
-
-        const text = heroTitle.textContent.trim();
-        heroTitle.innerHTML = '';
-
-        // Create span for each word
-        text.split(' ').forEach((word, i) => {
-            const span = document.createElement('span');
-            span.textContent = word + ' ';
-            span.style.opacity = '0';
-            span.style.display = 'inline-block';
-            span.style.transform = 'translateY(40px) skewY(10deg)';
-            span.style.transition = `all 0.5s cubic-bezier(0.2, 0.8, 0.3, 1) ${i * 0.1 + 0.3}s`;
-            heroTitle.appendChild(span);
-        });
-
-        // Reveal after loading
-        setTimeout(() => {
-            const spans = heroTitle.children;
-            for (let span of spans) {
-                span.style.opacity = '1';
-                span.style.transform = 'translateY(0) skewY(0)';
-            }
-        }, 600);
-    }
-
-    // === Staggered Reveal on Scroll (Intersection Observer) ===
-    function initStaggeredReveal() {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        const container = entry.target;
-                        const items = container.querySelectorAll('.feature-card, .news-card, .screenshot-item');
-                        items.forEach((item, i) => {
-                            if (!hasClass(item, 'animated')) {
-                                item.style.opacity = '0';
-                                item.style.transform = 'translateY(30px)';
-                                item.style.transition = `opacity 0.6s ease, transform 0.6s ease ${i * 0.08}s`;
-                                setTimeout(() => {
-                                    item.style.opacity = '1';
-                                    item.style.transform = 'translateY(0)';
-                                    addClass(item, 'animated');
-                                }, 50);
-                            }
-                        });
-                        observer.unobserve(container);
-                    }
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                window.scrollTo({
+                    top: target.offsetTop - 80,
+                    behavior: 'smooth'
                 });
-            },
-            { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
-        );
-
-        document.querySelectorAll('.features-grid, .news-grid, .screenshot-scroll-wrapper').forEach((container) => {
-            observer.observe(container);
+            }
         });
-    }
+    });
 
-    // === Magnetic Hover (Buttons & Cards) ===
-    function initMagneticHover() {
-        const hoverables = document.querySelectorAll('.btn-primary, .btn-secondary, .feature-card, .news-card, .screenshot-item');
-
-        hoverables.forEach((el) => {
-            el.addEventListener('mousemove', function (e) {
-                const rect = el.getBoundingClientRect();
-                const relX = e.clientX - rect.left - rect.width / 2;
-                const relY = e.clientY - rect.top - rect.height / 2;
-
-                // Subtle magnetic effect
-                const tx = relX * 0.06;
-                const ty = relY * 0.06;
-
-                el.style.transform = `translate(${tx}px, ${ty}px) scale(1.03)`;
-                el.style.zIndex = '10';
-            });
-
-            el.addEventListener('mouseleave', function () {
-                this.style.transform = '';
-                this.style.zIndex = 'auto';
-            });
+    // Enhanced button animations
+    const buttons = document.querySelectorAll('.btn-primary, .btn-secondary');
+    buttons.forEach(button => {
+        button.addEventListener('mousedown', function() {
+            this.style.transform = 'translateY(2px)';
         });
-    }
 
-    // === Floating Animation (Logo, Icons) ===
-    function initFloatingElements() {
-        const floats = document.querySelectorAll('.feature-icon, .game-logo, .logo h1, .read-more');
-        floats.forEach((el) => {
-            let animating = false;
-
-            el.addEventListener('mouseenter', () => {
-                if (animating) return;
-                animating = true;
-                el.style.transform = 'scale(1.15) rotate(6deg)';
-                setTimeout(() => { animating = false; }, 200);
-            });
-
-            el.addEventListener('mouseleave', () => {
-                el.style.transform = '';
-            });
+        button.addEventListener('mouseup', function() {
+            this.style.transform = '';
         });
-    }
 
-    // === Auto-Drift Screenshot Carousel ===
-    function initScreenshotDrift() {
-        const wrapper = document.querySelector('.screenshot-scroll-wrapper');
-        if (!wrapper) return;
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+        });
+    });
 
-        let scrollPos = 0;
-        let direction = 1;
+    // Feature card animations
+    const featureCards = document.querySelectorAll('.feature-card');
+    featureCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease';
+        });
 
-        function drift() {
-            scrollPos += direction * 0.4;
-            if (scrollPos > 120) direction = -1;
-            if (scrollPos < -120) direction = 1;
+        card.addEventListener('mouseleave', function() {
+            this.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+        });
+    });
 
-            wrapper.style.transform = `translateX(${scrollPos}px)`;
-            requestAnimationFrame(drift);
+    // News card animations
+    const newsCards = document.querySelectorAll('.news-card');
+    newsCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease';
+        });
+
+        card.addEventListener('mouseleave', function() {
+            this.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+        });
+    });
+
+    // Screenshot hover effect
+    const screenshots = document.querySelectorAll('.screenshot-item');
+    screenshots.forEach(screenshot => {
+        screenshot.addEventListener('mouseenter', function() {
+            this.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease';
+        });
+
+        screenshot.addEventListener('mouseleave', function() {
+            this.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+        });
+    });
+
+    // Hero section animation
+    const heroContent = document.querySelector('.hero-content');
+    heroContent.style.opacity = '0';
+    heroContent.style.transform = 'translateY(20px)';
+
+    setTimeout(() => {
+        heroContent.style.transition = 'opacity 1s ease, transform 1s ease';
+        heroContent.style.opacity = '1';
+        heroContent.style.transform = 'translateY(0)';
+    }, 300);
+
+    // Add ripple effect to buttons
+    function createRipple(event) {
+        const button = event.currentTarget;
+        const circle = document.createElement("span");
+        const diameter = Math.max(button.clientWidth, button.clientHeight);
+        const radius = diameter / 2;
+
+        circle.style.width = circle.style.height = `${diameter}px`;
+        circle.style.left = `${event.clientX - button.getBoundingClientRect().left - radius}px`;
+        circle.style.top = `${event.clientY - button.getBoundingClientRect().top - radius}px`;
+        circle.classList.add("ripple");
+
+        const ripple = button.getElementsByClassName("ripple")[0];
+        if (ripple) {
+            ripple.remove();
         }
 
-        setTimeout(drift, 2500);
+        button.appendChild(circle);
     }
 
-    // === Enhanced Video Trailer Interaction ===
-    function initTrailerAnimation() {
-        const container = document.querySelector('.video-container');
-        if (!container) return;
+    const primaryButtons = document.querySelectorAll('.btn-primary, .btn-secondary');
+    primaryButtons.forEach(button => {
+        button.addEventListener('click', createRipple);
+    });
 
-        container.style.transition = 'all 0.4s cubic-bezier(0.2, 0.8, 0.3, 1)';
-        container.addEventListener('mouseenter', () => {
-            container.style.transform = 'scale(1.03)';
-            container.style.boxShadow = '0 30px 60px rgba(0,0,0,0.35)';
-        });
+    // Add ripple styles dynamically
+    const style = document.createElement('style');
+    style.textContent = `
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
 
-        container.addEventListener('mouseleave', () => {
-            container.style.transform = '';
-            container.style.boxShadow = '0 20px 40px rgba(0,0,0,0.1)';
-        });
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Gallery auto-slide functionality
+    const screenshotContainer = document.querySelector('.screenshot-scroll-container');
+    const screenshotWrapper = document.querySelector('.screenshot-scroll-wrapper');
+    const screenshotItems = document.querySelectorAll('.screenshot-item');
+    const totalItems = screenshotItems.length;
+    let currentIndex = 0;
+    let autoSlideInterval;
+    let direction = 1; // 1 for forward, -1 for backward
+    let isAutoSliding = true;
+
+    // Create auto-slide indicator
+    const indicatorContainer = document.createElement('div');
+    indicatorContainer.className = 'auto-slide-indicator';
+    const progressIndicator = document.createElement('div');
+    progressIndicator.className = 'auto-slide-progress';
+    indicatorContainer.appendChild(progressIndicator);
+    screenshotContainer.parentNode.insertBefore(indicatorContainer, screenshotContainer.nextSibling);
+
+    // Function to update slide position
+    function updateSlidePosition() {
+        const itemWidth = 300 + 20; // width + gap
+        const maxScroll = (totalItems - 1) * itemWidth;
+        const newPosition = -currentIndex * itemWidth;
+
+        screenshotWrapper.style.transform = `translateX(${newPosition}px)`;
+
+        // Update scrollbar position to match visual position
+        screenshotContainer.scrollLeft = -newPosition;
     }
 
-    // === Header Scroll Effect (Refined) ===
-    function initHeaderScroll() {
-        const header = document.querySelector('header');
-        if (!header) return;
+    // Function to start auto-slide progress
+    function startAutoSlideProgress() {
+        progressIndicator.style.width = '0%';
+        progressIndicator.style.transition = 'none';
 
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 80) {
-                addClass(header, 'scrolled');
+        // Trigger reflow
+        void progressIndicator.offsetWidth;
+
+        progressIndicator.style.transition = `width 3s linear`;
+        progressIndicator.style.width = '100%';
+    }
+
+    // Function to reset auto-slide progress
+    function resetAutoSlideProgress() {
+        progressIndicator.style.transition = 'none';
+        progressIndicator.style.width = '0%';
+    }
+
+    // Auto slide function
+    function autoSlide() {
+        if (direction === 1) {
+            if (currentIndex < totalItems - 1) {
+                currentIndex++;
             } else {
-                removeClass(header, 'scrolled');
+                direction = -1; // Change direction to backward
+                currentIndex--;
             }
-        });
-    }
-
-    // === Mobile Menu Toggle ===
-    function initMobileMenu() {
-        const button = document.querySelector('.mobile-menu-button');
-        const nav = document.querySelector('nav ul');
-        if (!button || !nav) return;
-
-        button.addEventListener('click', () => {
-            toggleClass(nav, 'active');
-            button.setAttribute('aria-expanded', hasClass(nav, 'active'));
-        });
-
-        document.addEventListener('click', (e) => {
-            if (hasClass(nav, 'active') && !getClosest(e.target, 'nav') && e.target !== button) {
-                removeClass(nav, 'active');
-                button.setAttribute('aria-expanded', 'false');
+        } else {
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                direction = 1; // Change direction to forward
+                currentIndex++;
             }
-        });
+        }
+
+        updateSlidePosition();
+        resetAutoSlideProgress();
+        if (isAutoSliding) startAutoSlideProgress();
     }
 
-    // === Smooth Scroll for Anchor Links ===
-    function initSmoothScroll() {
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', e => {
-                e.preventDefault();
-                const target = document.querySelector(a.getAttribute('href'));
-                if (target) smoothScrollTo(target);
-            });
-        });
+    // Start auto sliding
+    function startAutoSlide() {
+        if (autoSlideInterval) clearInterval(autoSlideInterval);
+        autoSlideInterval = setInterval(autoSlide, 3000);
+        startAutoSlideProgress();
     }
 
-    // === Video Play Button Logic ===
-    function initVideoControls() {
-        const containers = document.querySelectorAll('.video-container');
-        containers.forEach(container => {
-            const video = container.querySelector('video');
-            const playButton = container.querySelector('.play-button');
-            if (!video || !playButton) return;
+    // Stop auto sliding
+    function stopAutoSlide() {
+        if (autoSlideInterval) {
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = null;
+        }
+        resetAutoSlideProgress();
+    }
 
-            playButton.addEventListener('click', () => {
-                if (video.paused) {
-                    video.play();
-                    addClass(playButton, 'hidden');
+    // Pause auto-slide on hover
+    screenshotContainer.addEventListener('mouseenter', function() {
+        if (isAutoSliding) {
+            stopAutoSlide();
+        }
+    });
+
+    screenshotContainer.addEventListener('mouseleave', function() {
+        if (isAutoSliding) {
+            startAutoSlide();
+        }
+    });
+
+    // Manual scroll detection
+    let isScrolling = false;
+    screenshotContainer.addEventListener('scroll', function() {
+        if (!isScrolling) {
+            stopAutoSlide();
+            isAutoSliding = false;
+        }
+
+        isScrolling = true;
+        clearTimeout(screenshotContainer.scrollTimer);
+
+        screenshotContainer.scrollTimer = setTimeout(function() {
+            isScrolling = false;
+            // Resume auto-slide after manual scrolling stops
+            setTimeout(function() {
+                if (!isAutoSliding) {
+                    isAutoSliding = true;
+                    startAutoSlide();
                 }
-            });
+            }, 2000);
+        }, 150);
+    });
 
-            video.addEventListener('play', () => {
-                addClass(playButton, 'hidden');
-            });
+    // Initialize auto-slide
+    startAutoSlide();
 
-            video.addEventListener('pause', () => {
-                // Optionally show play button again
-                // removeClass(playButton, 'hidden');
-            });
-        });
-    }
-
-    // === Initialize All Systems ===
-    function init() {
-        initLoading();
-        domReady(() => {
-            setTimeout(() => {
-                initTextReveal();
-                initStaggeredReveal();
-                initMagneticHover();
-                initFloatingElements();
-                initScreenshotDrift();
-                initTrailerAnimation();
-                initHeaderScroll();
-                initMobileMenu();
-                initSmoothScroll();
-                initVideoControls();
-            }, 300);
-        });
-    }
-
-    // Start the engine
-    init();
-
-})();
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        updateSlidePosition();
+    });
+});
