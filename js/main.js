@@ -21,40 +21,44 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuButton = document.querySelector('.mobile-menu-button');
     const navMenu = document.querySelector('nav ul');
 
-    mobileMenuButton.addEventListener('click', function() {
-        const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
-        mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
-        navMenu.classList.toggle('active');
+    if (mobileMenuButton && navMenu) {
+        mobileMenuButton.addEventListener('click', function() {
+            const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+            mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+            navMenu.classList.toggle('active');
 
-        // Animate hamburger to X
-        const spans = mobileMenuButton.querySelectorAll('span');
-        if (!isExpanded) {
-            spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
-            spans[1].style.opacity = '0';
-            spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
-        } else {
-            spans[0].style.transform = 'none';
-            spans[1].style.opacity = '1';
-            spans[2].style.transform = 'none';
-        }
-    });
+            // Animate hamburger to X
+            const spans = mobileMenuButton.querySelectorAll('span');
+            if (!isExpanded) {
+                spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+    }
 
     // Video play button functionality
     const playButton = document.querySelector('.play-button');
     const video = document.querySelector('.video-container video');
 
-    playButton.addEventListener('click', function() {
-        video.play();
-        playButton.classList.add('hidden');
-    });
+    if (playButton && video) {
+        playButton.addEventListener('click', function() {
+            video.play();
+            playButton.classList.add('hidden');
+        });
 
-    video.addEventListener('pause', function() {
-        playButton.classList.remove('hidden');
-    });
+        video.addEventListener('pause', function() {
+            playButton.classList.remove('hidden');
+        });
 
-    video.addEventListener('play', function() {
-        playButton.classList.add('hidden');
-    });
+        video.addEventListener('play', function() {
+            playButton.classList.add('hidden');
+        });
+    }
 
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -124,14 +128,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Hero section animation
     const heroContent = document.querySelector('.hero-content');
-    heroContent.style.opacity = '0';
-    heroContent.style.transform = 'translateY(20px)';
+    if (heroContent) {
+        heroContent.style.opacity = '0';
+        heroContent.style.transform = 'translateY(20px)';
 
-    setTimeout(() => {
-        heroContent.style.transition = 'opacity 1s ease, transform 1s ease';
-        heroContent.style.opacity = '1';
-        heroContent.style.transform = 'translateY(0)';
-    }, 300);
+        setTimeout(() => {
+            heroContent.style.transition = 'opacity 1s ease, transform 1s ease';
+            heroContent.style.opacity = '1';
+            heroContent.style.transform = 'translateY(0)';
+        }, 300);
+    }
 
     // Add ripple effect to buttons
     function createRipple(event) {
@@ -169,7 +175,6 @@ document.addEventListener('DOMContentLoaded', function() {
             animation: ripple 0.6s linear;
             pointer-events: none;
         }
-
         @keyframes ripple {
             to {
                 transform: scale(4);
@@ -183,130 +188,132 @@ document.addEventListener('DOMContentLoaded', function() {
     const screenshotContainer = document.querySelector('.screenshot-scroll-container');
     const screenshotWrapper = document.querySelector('.screenshot-scroll-wrapper');
     const screenshotItems = document.querySelectorAll('.screenshot-item');
-    const totalItems = screenshotItems.length;
-    let currentIndex = 0;
-    let autoSlideInterval;
-    let direction = 1; // 1 for forward, -1 for backward
-    let isAutoSliding = true;
 
-    // Create auto-slide indicator
-    const indicatorContainer = document.createElement('div');
-    indicatorContainer.className = 'auto-slide-indicator';
-    const progressIndicator = document.createElement('div');
-    progressIndicator.className = 'auto-slide-progress';
-    indicatorContainer.appendChild(progressIndicator);
-    screenshotContainer.parentNode.insertBefore(indicatorContainer, screenshotContainer.nextSibling);
+    if (screenshotContainer && screenshotWrapper && screenshotItems.length > 0) {
+        const totalItems = screenshotItems.length;
+        let currentIndex = 0;
+        let autoSlideInterval;
+        let direction = 1; // 1 for forward, -1 for backward
+        let isAutoSliding = true;
 
-    // Function to update slide position
-    function updateSlidePosition() {
-        const itemWidth = 300 + 20; // width + gap
-        const maxScroll = (totalItems - 1) * itemWidth;
-        const newPosition = -currentIndex * itemWidth;
+        // Create auto-slide indicator
+        const indicatorContainer = document.createElement('div');
+        indicatorContainer.className = 'auto-slide-indicator';
+        const progressIndicator = document.createElement('div');
+        progressIndicator.className = 'auto-slide-progress';
+        indicatorContainer.appendChild(progressIndicator);
+        screenshotContainer.parentNode.insertBefore(indicatorContainer, screenshotContainer.nextSibling);
 
-        screenshotWrapper.style.transform = `translateX(${newPosition}px)`;
+        // Function to update slide position
+        function updateSlidePosition() {
+            const itemWidth = 300 + 20; // width + gap
+            const maxScroll = (totalItems - 1) * itemWidth;
+            const newPosition = -currentIndex * itemWidth;
+            screenshotWrapper.style.transform = `translateX(${newPosition}px)`;
 
-        // Update scrollbar position to match visual position
-        screenshotContainer.scrollLeft = -newPosition;
-    }
-
-    // Function to start auto-slide progress
-    function startAutoSlideProgress() {
-        progressIndicator.style.width = '0%';
-        progressIndicator.style.transition = 'none';
-
-        // Trigger reflow
-        void progressIndicator.offsetWidth;
-
-        progressIndicator.style.transition = `width 3s linear`;
-        progressIndicator.style.width = '100%';
-    }
-
-    // Function to reset auto-slide progress
-    function resetAutoSlideProgress() {
-        progressIndicator.style.transition = 'none';
-        progressIndicator.style.width = '0%';
-    }
-
-    // Auto slide function
-    function autoSlide() {
-        if (direction === 1) {
-            if (currentIndex < totalItems - 1) {
-                currentIndex++;
-            } else {
-                direction = -1; // Change direction to backward
-                currentIndex--;
-            }
-        } else {
-            if (currentIndex > 0) {
-                currentIndex--;
-            } else {
-                direction = 1; // Change direction to forward
-                currentIndex++;
-            }
+            // Update scrollbar position to match visual position
+            screenshotContainer.scrollLeft = -newPosition;
         }
 
-        updateSlidePosition();
-        resetAutoSlideProgress();
-        if (isAutoSliding) startAutoSlideProgress();
-    }
+        // Function to start auto-slide progress
+        function startAutoSlideProgress() {
+            progressIndicator.style.width = '0%';
+            progressIndicator.style.transition = 'none';
 
-    // Start auto sliding
-    function startAutoSlide() {
-        if (autoSlideInterval) clearInterval(autoSlideInterval);
-        autoSlideInterval = setInterval(autoSlide, 3000);
-        startAutoSlideProgress();
-    }
+            // Trigger reflow
+            void progressIndicator.offsetWidth;
 
-    // Stop auto sliding
-    function stopAutoSlide() {
-        if (autoSlideInterval) {
-            clearInterval(autoSlideInterval);
-            autoSlideInterval = null;
-        }
-        resetAutoSlideProgress();
-    }
-
-    // Pause auto-slide on hover
-    screenshotContainer.addEventListener('mouseenter', function() {
-        if (isAutoSliding) {
-            stopAutoSlide();
-        }
-    });
-
-    screenshotContainer.addEventListener('mouseleave', function() {
-        if (isAutoSliding) {
-            startAutoSlide();
-        }
-    });
-
-    // Manual scroll detection
-    let isScrolling = false;
-    screenshotContainer.addEventListener('scroll', function() {
-        if (!isScrolling) {
-            stopAutoSlide();
-            isAutoSliding = false;
+            progressIndicator.style.transition = `width 3s linear`;
+            progressIndicator.style.width = '100%';
         }
 
-        isScrolling = true;
-        clearTimeout(screenshotContainer.scrollTimer);
+        // Function to reset auto-slide progress
+        function resetAutoSlideProgress() {
+            progressIndicator.style.transition = 'none';
+            progressIndicator.style.width = '0%';
+        }
 
-        screenshotContainer.scrollTimer = setTimeout(function() {
-            isScrolling = false;
-            // Resume auto-slide after manual scrolling stops
-            setTimeout(function() {
-                if (!isAutoSliding) {
-                    isAutoSliding = true;
-                    startAutoSlide();
+        // Auto slide function
+        function autoSlide() {
+            if (direction === 1) {
+                if (currentIndex < totalItems - 1) {
+                    currentIndex++;
+                } else {
+                    direction = -1; // Change direction to backward
+                    currentIndex--;
                 }
-            }, 2000);
-        }, 150);
-    });
+            } else {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    direction = 1; // Change direction to forward
+                    currentIndex++;
+                }
+            }
 
-    // Initialize auto-slide
-    startAutoSlide();
+            updateSlidePosition();
+            resetAutoSlideProgress();
+            if (isAutoSliding) startAutoSlideProgress();
+        }
 
-    // Handle window resize
-    window.addEventListener('resize', function() {
-        updateSlidePosition();
-    });
+        // Start auto sliding
+        function startAutoSlide() {
+            if (autoSlideInterval) clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(autoSlide, 3000);
+            startAutoSlideProgress();
+        }
+
+        // Stop auto sliding
+        function stopAutoSlide() {
+            if (autoSlideInterval) {
+                clearInterval(autoSlideInterval);
+                autoSlideInterval = null;
+            }
+            resetAutoSlideProgress();
+        }
+
+        // Pause auto-slide on hover
+        screenshotContainer.addEventListener('mouseenter', function() {
+            if (isAutoSliding) {
+                stopAutoSlide();
+            }
+        });
+
+        screenshotContainer.addEventListener('mouseleave', function() {
+            if (isAutoSliding) {
+                startAutoSlide();
+            }
+        });
+
+        // Manual scroll detection
+        let isScrolling = false;
+        screenshotContainer.addEventListener('scroll', function() {
+            if (!isScrolling) {
+                stopAutoSlide();
+                isAutoSliding = false;
+            }
+
+            isScrolling = true;
+            clearTimeout(screenshotContainer.scrollTimer);
+
+            screenshotContainer.scrollTimer = setTimeout(function() {
+                isScrolling = false;
+                // Resume auto-slide after manual scrolling stops
+                setTimeout(function() {
+                    if (!isAutoSliding) {
+                        isAutoSliding = true;
+                        startAutoSlide();
+                    }
+                }, 2000);
+            }, 150);
+        });
+
+        // Initialize auto-slide
+        startAutoSlide();
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            updateSlidePosition();
+        });
+    }
 });
