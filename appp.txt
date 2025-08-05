@@ -1,7 +1,6 @@
 # app.py - Fixed for homepage navigation
 
 from flask import Flask, send_from_directory, abort, redirect  # ← Added 'redirect'
-import os
 from datetime import datetime
 
 app = Flask(__name__, static_folder='assets', template_folder='.')

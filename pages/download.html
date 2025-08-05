@@ -3,162 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Download - Panda X</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="icon" href="../assets/images/icon.png" type="image/png">
+
+    <!-- Google Fonts for Premium Gaming Experience -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Skip to content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Loading indicator -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">LOADING ADVENTURE...</div>
+    </div>
+
+    <!-- Floating particles background -->
+    <div class="particles-container" id="particlesContainer"></div>
+
     <!-- Header -->
-    <header>
+    <header role="banner">
         <div class="container">
             <div class="logo">
-                <img src="../assets/images/game-logo.png" alt="Panda X Logo" class="game-logo">
+                <img src="../assets/images/game-logo.png" alt="Panda X Logo" class="game-logo" loading="lazy">
                 <h1>PANDA X</h1>
             </div>
-            <nav>
+
+            <!-- Mobile menu button -->
+            <button class="mobile-menu-button" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav role="navigation" aria-label="Main navigation">
                 <ul>
                     <li><a href="../index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="gameplay.html">Gameplay</a></li>
-                    <li><a href="download.html" class="active">Download</a></li>
+                    <li><a href="download.html" class="active" aria-current="page">Download</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Download Hero -->
-    <section class="hero" style="height: 60vh;">
-        <div class="hero-content">
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero hero-about" role="banner">
+            <div class="hero-content">
+                <div class="container">
+                    <h1>START YOUR JOURNEY</h1>
+                    <p>Begin guiding Panda X on his adventure home. Choose your platform and embark on an unforgettable quest filled with puzzles, friendship, and discovery.</p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">1M+</div>
+                            <div class="stat-label">Downloads</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">4.8★</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">Free</div>
+                            <div class="stat-label">To Play</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-overlay"></div>
+        </section>
+
+        <!-- Download Options Section -->
+        <section class="features" id="download-options" aria-labelledby="download-heading">
             <div class="container">
-                <h1>START YOUR JOURNEY</h1>
-                <p>Begin guiding Panda X on his adventure home</p>
-            </div>
-        </div>
-        <div class="hero-overlay"></div>
-    </section>
-
-    <!-- Download Options -->
-    <section class="features">
-        <div class="container">
-            <h2>GET THE GAME</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3>Mobile Version</h3>
-                    <p>iOS & Android • Available Now</p>
-                    <div style="margin: 1rem 0;">
-                        <div style="background: #f0f0f0; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                            <strong>System Requirements:</strong><br>
-                            iOS: 12.0+<br>
-                            Android: 7.0+<br>
-                            Storage: 200 MB available space<br>
-                            Internet: Required for online features
+                <h2 id="download-heading">GET THE GAME</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">📱</div>
+                        <h3>Mobile Version</h3>
+                        <p class="platform-subtitle">iOS & Android • Available Now</p>
+                        <div class="system-requirements">
+                            <h4>System Requirements:</h4>
+                            <ul>
+                                <li>iOS: 12.0+ / Android: 7.0+</li>
+                                <li>Storage: 200 MB available space</li>
+                                <li>Internet: Required for online features</li>
+                                <li>RAM: 2 GB minimum</li>
+                            </ul>
+                        </div>
+                        <div class="download-buttons">
+                            <a href="#" class="btn-primary">Download for iOS</a>
+                            <a href="#" class="btn-secondary">Download for Android</a>
                         </div>
                     </div>
-                    <a href="#" class="btn-primary" style="display: inline-block;">Download Now</a>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💻</div>
-                    <h3>PC Version</h3>
-                    <p>Windows & Mac • Coming Soon</p>
-                    <div style="margin: 1rem 0;">
-                        <div style="background: #f0f0f0; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                            <strong>System Requirements:</strong><br>
-                            OS: Windows 10 64-bit / Mac OS 11+<br>
-                            CPU: Intel i5-6400 / AMD Ryzen 3 2200G<br>
-                            RAM: 4 GB<br>
-                            GPU: GTX 950 / RX 550<br>
-                            Storage: 500 MB available space
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">💻</div>
+                        <h3>PC Version</h3>
+                        <p class="platform-subtitle">Windows & Mac • Coming Soon</p>
+                        <div class="system-requirements">
+                            <h4>System Requirements:</h4>
+                            <ul>
+                                <li>OS: Windows 10 64-bit / Mac OS 11+</li>
+                                <li>CPU: Intel i5-6400 / AMD Ryzen 3 2200G</li>
+                                <li>RAM: 4 GB minimum</li>
+                                <li>GPU: GTX 950 / RX 550</li>
+                                <li>Storage: 500 MB available space</li>
+                            </ul>
+                        </div>
+                        <div class="download-buttons">
+                            <a href="#" class="btn-secondary">Pre-Order Now</a>
                         </div>
                     </div>
-                    <a href="#" class="btn-secondary" style="display: inline-block;">Pre-Order</a>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌐</div>
-                    <h3>Web Version</h3>
-                    <p>Play in Browser • Available Now</p>
-                    <div style="margin: 1rem 0;">
-                        <div style="background: #f0f0f0; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                            <strong>Requirements:</strong><br>
-                            Modern browser (Chrome, Firefox, Safari)<br>
-                            Stable internet connection<br>
-                            10 Mbps minimum recommended<br>
-                            Works on all devices
+                    <div class="feature-card highlight-card">
+                        <div class="feature-icon" aria-hidden="true">🌐</div>
+                        <h3>Web Version</h3>
+                        <p class="platform-subtitle">Play in Browser • Available Now</p>
+                        <div class="system-requirements">
+                            <h4>Requirements:</h4>
+                            <ul>
+                                <li>Modern browser (Chrome, Firefox, Safari)</li>
+                                <li>Stable internet connection</li>
+                                <li>10 Mbps minimum recommended</li>
+                                <li>Works on all devices with browsers</li>
+                            </ul>
+                        </div>
+                        <div class="download-buttons">
+                            <a href="#" class="btn-primary">Play Now</a>
                         </div>
                     </div>
-                    <a href="#" class="btn-primary" style="display: inline-block;">Play Now</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Game Access Section -->
-    <section class="features">
-        <div class="container">
-            <h2>START YOUR ADVENTURE</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <h3>Free to Play</h3>
-                    <div style="font-size: 2rem; color: #4ecdc4; margin: 1rem 0;">$0.00</div>
-                    <ul style="text-align: left; margin: 1rem 0; padding-left: 1rem;">
-                        <li>Full game access</li>
-                        <li>All core features</li>
-                        <li>Weekly challenges</li>
-                        <li>Global chat</li>
-                        <li>Basic customization</li>
-                    </ul>
-                    <a href="#" class="btn-primary" style="display: inline-block;">Start Playing</a>
-                </div>
-                <div class="feature-card" style="border: 2px solid #4ecdc4;">
-                    <h3>Adventurer's Pack</h3>
-                    <div style="font-size: 2rem; color: #ff6b6b; margin: 1rem 0;">$4.99</div>
-                    <ul style="text-align: left; margin: 1rem 0; padding-left: 1rem;">
-                        <li>Everything in Free version</li>
-                        <li>50 exclusive panda skins</li>
-                        <li>25 wagon customization options</li>
-                        <li>10 bonus mini-games</li>
-                        <li>Early access to new cities</li>
-                        <li>Special profile badge</li>
-                    </ul>
-                    <a href="#" class="btn-primary" style="display: inline-block;">Get Pack</a>
+        <!-- Pricing Section -->
+        <section class="vision-section" aria-labelledby="pricing-heading">
+            <div class="container">
+                <h2 id="pricing-heading">START YOUR ADVENTURE</h2>
+                <div class="pricing-grid">
+                    <div class="pricing-card free-card">
+                        <div class="pricing-header">
+                            <h3>Free to Play</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">0</span>
+                                <span class="period">.00</span>
+                            </div>
+                        </div>
+                        <div class="features-list">
+                            <ul>
+                                <li>✅ Full game access</li>
+                                <li>✅ All core features</li>
+                                <li>✅ Weekly challenges</li>
+                                <li>✅ Global chat</li>
+                                <li>✅ Basic customization</li>
+                                <li>✅ Community features</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="btn-secondary pricing-btn">Start Playing</a>
+                    </div>
+                    <div class="pricing-card premium-card">
+                        <div class="pricing-badge">Most Popular</div>
+                        <div class="pricing-header">
+                            <h3>Adventurer's Pack</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">4</span>
+                                <span class="period">.99</span>
+                            </div>
+                        </div>
+                        <div class="features-list">
+                            <ul>
+                                <li>✅ Everything in Free version</li>
+                                <li>🌟 50 exclusive panda skins</li>
+                                <li>🎨 25 wagon customization options</li>
+                                <li>🎮 10 bonus mini-games</li>
+                                <li>🚀 Early access to new cities</li>
+                                <li>🏆 Special profile badge</li>
+                                <li>💎 Premium rewards</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="btn-primary pricing-btn">Get Pack</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- FAQ Section -->
-    <section class="features">
-        <div class="container">
-            <h2>FREQUENTLY ASKED QUESTIONS</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <h3>Is Panda X free to play?</h3>
-                    <p>Yes! Panda X is completely free to download and play. The Adventurer's Pack is optional.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Do I need internet to play?</h3>
-                    <p>Yes, an internet connection is required for the global chat, leaderboards, and multiplayer features.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Is there cross-platform play?</h3>
-                    <p>Yes, play with friends regardless of whether they're on mobile, PC, or web browsers.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>How often is new content added?</h3>
-                    <p>We release new cities, challenges, and mini-games every month to keep your journey fresh!</p>
+        <!-- FAQ Section -->
+        <section class="news" aria-labelledby="faq-heading">
+            <div class="container">
+                <h2 id="faq-heading">FREQUENTLY ASKED QUESTIONS</h2>
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="news-date">PRICING</div>
+                        <h3>Is Panda X free to play?</h3>
+                        <p>Yes! Panda X is completely free to download and play. The Adventurer's Pack is optional and provides additional customization and content.</p>
+                    </article>
+                    <article class="news-card">
+                        <div class="news-date">TECHNICAL</div>
+                        <h3>Do I need internet to play?</h3>
+                        <p>Yes, an internet connection is required for the global chat, leaderboards, multiplayer features, and cloud save synchronization.</p>
+                    </article>
+                    <article class="news-card">
+                        <div class="news-date">COMPATIBILITY</div>
+                        <h3>Is there cross-platform play?</h3>
+                        <p>Absolutely! Play with friends regardless of whether they're on mobile, PC, or web browsers. Your progress syncs across all platforms.</p>
+                    </article>
+                    <article class="news-card">
+                        <div class="news-date">CONTENT</div>
+                        <h3>How often is new content added?</h3>
+                        <p>We release new cities, challenges, and mini-games every month to keep your journey fresh and exciting!</p>
+                    </article>
+                    <article class="news-card">
+                        <div class="news-date">SUPPORT</div>
+                        <h3>What if I need help?</h3>
+                        <p>Our community support team is available 24/7 through email, and we have live chat during business hours. Check our Contact page!</p>
+                    </article>
+                    <article class="news-card">
+                        <div class="news-date">UPDATES</div>
+                        <h3>Are updates free?</h3>
+                        <p>Yes! All game updates, bug fixes, and new content are completely free for all players, regardless of whether you have the Adventurer's Pack.</p>
+                    </article>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="legend-section" aria-labelledby="cta-heading">
+            <div class="container">
+                <h2 id="cta-heading">READY TO BEGIN?</h2>
+                <div class="legend-content">
+                    <div class="legend-text">
+                        <div class="text-block">
+                            <div class="text-icon">🚀</div>
+                            <p><strong>Download now</strong> and join millions of players guiding Panda X on his incredible journey home.</p>
+                        </div>
+                        <div class="text-block">
+                            <div class="text-icon">🌟</div>
+                            <p><strong>Start for free</strong> and experience the full adventure with optional premium content available.</p>
+                        </div>
+                        <div class="text-block">
+                            <div class="text-icon">👥</div>
+                            <p><strong>Join the community</strong> of adventurers and make friends from around the world.</p>
+                        </div>
+                    </div>
+                    <div class="legend-visual">
+                        <div class="panda-illustration">
+                            <div class="panda-circle">
+                                <div class="panda-emoji">🎮</div>
+                            </div>
+                            <div class="journey-path">
+                                <div class="path-dot active"></div>
+                                <div class="path-dot active"></div>
+                                <div class="path-dot active"></div>
+                                <div class="path-dot active"></div>
+                                <div class="path-dot goal"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer>
+    <footer role="contentinfo">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>PANDA X</h3>
-                    <p>Guide Panda X home through puzzles, pitfalls, and possibilities in this unique adventure.</p>
+                    <p>Guide Panda X home through puzzles, pitfalls, and possibilities in this unique adventure that will captivate your imagination.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
@@ -173,10 +291,10 @@
                 <div class="footer-section">
                     <h4>Connect</h4>
                     <div class="social-links">
-                        <a href="#">Twitter</a>
-                        <a href="#">Facebook</a>
-                        <a href="#">Instagram</a>
-                        <a href="#">YouTube</a>
+                        <a href="#" aria-label="Follow us on Twitter">Twitter</a>
+                        <a href="#" aria-label="Follow us on Facebook">Facebook</a>
+                        <a href="#" aria-label="Follow us on Instagram">Instagram</a>
+                        <a href="#" aria-label="Subscribe on YouTube">YouTube</a>
                     </div>
                 </div>
             </div>
@@ -187,5 +305,187 @@
     </footer>
 
     <script src="../js/main.js"></script>
+
+    <style>
+        .platform-subtitle {
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        .system-requirements {
+            background: var(--glass-bg);
+            padding: 1.5rem;
+            border-radius: var(--border-radius-sm);
+            margin: 1.5rem 0;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .system-requirements h4 {
+            color: var(--text-blue);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .system-requirements ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .system-requirements li {
+            padding: 0.5rem 0;
+            color: var(--text-readable);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .system-requirements li:last-child {
+            border-bottom: none;
+        }
+
+        .download-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .highlight-card {
+            border: 2px solid rgba(59, 130, 246, 0.4);
+            background: var(--glass-hover);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-bounce);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .premium-card {
+            border: 2px solid rgba(59, 130, 246, 0.4);
+            transform: scale(1.05);
+            background: var(--glass-hover);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--warm-gradient);
+            color: white;
+            padding: 0.5rem 3rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            transform: rotate(45deg);
+            letter-spacing: 0.5px;
+        }
+
+        .pricing-header h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .price {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .currency {
+            font-size: 1.5rem;
+            color: var(--text-blue);
+            font-weight: 600;
+        }
+
+        .amount {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--text-blue);
+            font-family: 'Orbitron', monospace;
+        }
+
+        .period {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .features-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .features-list li {
+            padding: 0.75rem 0;
+            color: var(--text-readable);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+            font-size: 0.95rem;
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-btn {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--shadow-large);
+        }
+
+        .premium-card:hover {
+            transform: translateY(-5px) scale(1.07);
+        }
+
+        @media (max-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .premium-card {
+                transform: none;
+            }
+
+            .premium-card:hover {
+                transform: translateY(-5px) scale(1.02);
+            }
+
+            .download-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
 </body>
 </html>

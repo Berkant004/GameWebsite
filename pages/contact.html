@@ -3,153 +3,336 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Contact - Panda X</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="icon" href="../assets/images/icon.png" type="image/png">
+
+    <!-- Google Fonts for Premium Gaming Experience -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Skip to content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Loading indicator -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">LOADING ADVENTURE...</div>
+    </div>
+
+    <!-- Floating particles background -->
+    <div class="particles-container" id="particlesContainer"></div>
+
     <!-- Header -->
-    <header>
+    <header role="banner">
         <div class="container">
             <div class="logo">
-                <img src="../assets/images/game-logo.png" alt="Panda X Logo" class="game-logo">
+                <img src="../assets/images/game-logo.png" alt="Panda X Logo" class="game-logo" loading="lazy">
                 <h1>PANDA X</h1>
             </div>
-            <nav>
+
+            <!-- Mobile menu button -->
+            <button class="mobile-menu-button" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav role="navigation" aria-label="Main navigation">
                 <ul>
                     <li><a href="../index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="gameplay.html">Gameplay</a></li>
                     <li><a href="download.html">Download</a></li>
-                    <li><a href="contact.html" class="active">Contact</a></li>
+                    <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Contact Hero -->
-    <section class="hero" style="height: 60vh;">
-        <div class="hero-content">
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero hero-about" role="banner">
+            <div class="hero-content">
+                <div class="container">
+                    <h1>JOIN THE PANDA HERD</h1>
+                    <p>We'd love to hear from fellow adventurers. Whether you need support, want to share feedback, or just want to connect with our community, we're here for you.</p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Support</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">&lt;24h</div>
+                            <div class="stat-label">Response</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">Global</div>
+                            <div class="stat-label">Community</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-overlay"></div>
+        </section>
+
+        <!-- Contact Methods Section -->
+        <section class="features" id="contact-methods" aria-labelledby="contact-heading">
             <div class="container">
-                <h1>JOIN THE HERD</h1>
-                <p>We'd love to hear from fellow adventurers</p>
-            </div>
-        </div>
-        <div class="hero-overlay"></div>
-    </section>
-
-    <!-- Contact Info -->
-    <section class="features">
-        <div class="container">
-            <h2>GET IN TOUCH</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📧</div>
-                    <h3>General Inquiries</h3>
-                    <p>For general questions about the game, press inquiries, or partnership opportunities.</p>
-                    <p style="color: #4ecdc4; font-weight: 600;">hello@pandax.com</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🐛</div>
-                    <h3>Bug Reports</h3>
-                    <p>Spotted a bug? Help us make Panda X's journey smoother for everyone!</p>
-                    <p style="color: #4ecdc4; font-weight: 600;">bugs@pandax.com</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🐼</div>
-                    <h3>Community Support</h3>
-                    <p>Need help with gameplay, accounts, or have a question about the community?</p>
-                    <p style="color: #4ecdc4; font-weight: 600;">community@pandax.com</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Support Hours -->
-    <section class="features">
-        <div class="container">
-            <h2>COMMUNITY HOURS</h2>
-            <div class="features-grid">
-                <div class="feature-card" style="grid-column: 1 / -1;">
-                    <h3>Panda Support Team</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: left; margin-top: 2rem;">
-                        <div>
-                            <h4 style="color: #ff6b6b;">Live Chat</h4>
-                            <p>Monday - Friday: 10:00 AM - 8:00 PM EST</p>
-                            <p>Saturday - Sunday: 12:00 PM - 6:00 PM EST</p>
+                <h2 id="contact-heading">GET IN TOUCH</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">📧</div>
+                        <h3>General Inquiries</h3>
+                        <p>For general questions about the game, press inquiries, partnership opportunities, or business matters.</p>
+                        <div class="contact-info">
+                            <strong>hello@pandax.com</strong>
                         </div>
-                        <div>
-                            <h4 style="color: #ff6b6b;">Email Support</h4>
-                            <p>24/7 - Response within 24 hours</p>
+                        <a href="mailto:hello@pandax.com" class="btn-secondary contact-btn">Send Email</a>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">🐛</div>
+                        <h3>Bug Reports</h3>
+                        <p>Spotted a bug or technical issue? Help us make Panda X's journey smoother for everyone by reporting it!</p>
+                        <div class="contact-info">
+                            <strong>bugs@pandax.com</strong>
                         </div>
-                        <div>
-                            <h4 style="color: #ff6b6b;">Community Forums</h4>
-                            <p>Always available - Fellow pandas and staff support</p>
+                        <a href="mailto:bugs@pandax.com" class="btn-secondary contact-btn">Report Bug</a>
+                    </div>
+                    <div class="feature-card highlight-card">
+                        <div class="feature-icon" aria-hidden="true">🐼</div>
+                        <h3>Community Support</h3>
+                        <p>Need help with gameplay, account issues, or have questions about the community? Our support pandas are here!</p>
+                        <div class="contact-info">
+                            <strong>community@pandax.com</strong>
+                        </div>
+                        <a href="mailto:community@pandax.com" class="btn-primary contact-btn">Get Support</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support Hours Section -->
+        <section class="legend-section" aria-labelledby="hours-heading">
+            <div class="container">
+                <h2 id="hours-heading">COMMUNITY HOURS</h2>
+                <div class="support-hours-grid">
+                    <div class="hours-card">
+                        <div class="hours-icon">💬</div>
+                        <h3>Live Chat</h3>
+                        <div class="hours-info">
+                            <p><strong>Monday - Friday:</strong><br>10:00 AM - 8:00 PM EST</p>
+                            <p><strong>Saturday - Sunday:</strong><br>12:00 PM - 6:00 PM EST</p>
+                        </div>
+                        <div class="status-indicator live">
+                            <span class="status-dot"></span>
+                            <span>Currently Available</span>
+                        </div>
+                    </div>
+                    <div class="hours-card">
+                        <div class="hours-icon">📨</div>
+                        <h3>Email Support</h3>
+                        <div class="hours-info">
+                            <p><strong>Available:</strong> 24/7</p>
+                            <p><strong>Response Time:</strong> Within 24 hours</p>
+                            <p><strong>Languages:</strong> English, Chinese, Spanish</p>
+                        </div>
+                        <div class="status-indicator available">
+                            <span class="status-dot"></span>
+                            <span>Always Available</span>
+                        </div>
+                    </div>
+                    <div class="hours-card">
+                        <div class="hours-icon">👥</div>
+                        <h3>Community Forums</h3>
+                        <div class="hours-info">
+                            <p><strong>Available:</strong> 24/7</p>
+                            <p><strong>Community Support:</strong> Fellow pandas and staff</p>
+                            <p><strong>Response Time:</strong> Usually within 2 hours</p>
+                        </div>
+                        <div class="status-indicator available">
+                            <span class="status-dot"></span>
+                            <span>Always Active</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Social Media -->
-    <section class="features">
-        <div class="container">
-            <h2>FOLLOW THE PANDA HERD</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🐦</div>
-                    <h3>Twitter</h3>
-                    <p>Latest news, updates, and community engagement</p>
-                    <a href="#" class="btn-primary" style="display: inline-block; margin-top: 1rem;">Follow @PandaXGame</a>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📸</div>
-                    <h3>Instagram</h3>
-                    <p>Behind-the-scenes content and artwork</p>
-                    <a href="#" class="btn-primary" style="display: inline-block; margin-top: 1rem;">Follow @PandaXGame</a>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">▶️</div>
-                    <h3>YouTube</h3>
-                    <p>Gameplay trailers, developer diaries, and streams</p>
-                    <a href="#" class="btn-primary" style="display: inline-block; margin-top: 1rem;">Subscribe</a>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👥</div>
-                    <h3>Discord</h3>
-                    <p>Join our community server for real-time chat</p>
-                    <a href="#" class="btn-primary" style="display: inline-block; margin-top: 1rem;">Join Server</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Office Location -->
-    <section class="features">
-        <div class="container">
-            <h2>OUR BAMBOO FOREST</h2>
-            <div class="features-grid">
-                <div class="feature-card" style="grid-column: 1 / -1;">
-                    <h3>Panda X Studios</h3>
-                    <p>456 Adventure Lane<br>
-                    Chengdu, Sichuan 610000<br>
-                    China</p>
-                    <div style="margin-top: 2rem;">
-                        <img src="../assets/images/screenshot1.jpg" alt="Panda X Studio" style="width: 100%; height: 300px; object-fit: cover; border-radius: 10px;">
+        <!-- Social Media Section -->
+        <section class="vision-section" aria-labelledby="social-heading">
+            <div class="container">
+                <h2 id="social-heading">FOLLOW THE PANDA HERD</h2>
+                <div class="vision-grid">
+                    <div class="vision-card primary">
+                        <div class="vision-icon">🐦</div>
+                        <h3>Twitter</h3>
+                        <p>Latest news, updates, community engagement, and real-time announcements from the Panda X team.</p>
+                        <a href="#" class="btn-primary social-btn">Follow @PandaXGame</a>
+                        <div class="social-stats">15K+ Followers</div>
+                    </div>
+                    <div class="vision-card secondary">
+                        <div class="vision-icon">📸</div>
+                        <h3>Instagram</h3>
+                        <p>Behind-the-scenes content, beautiful artwork, screenshots, and glimpses into the development process.</p>
+                        <a href="#" class="btn-primary social-btn">Follow @PandaXGame</a>
+                        <div class="social-stats">8K+ Followers</div>
+                    </div>
+                    <div class="vision-card tertiary">
+                        <div class="vision-icon">▶️</div>
+                        <h3>YouTube</h3>
+                        <p>Gameplay trailers, developer diaries, live streams, and tutorials to help you master your journey.</p>
+                        <a href="#" class="btn-primary social-btn">Subscribe</a>
+                        <div class="social-stats">25K+ Subscribers</div>
+                    </div>
+                    <div class="vision-card primary">
+                        <div class="vision-icon">🎮</div>
+                        <h3>Discord</h3>
+                        <p>Join our community server for real-time chat, find teammates, share tips, and connect with fellow adventurers.</p>
+                        <a href="#" class="btn-primary social-btn">Join Server</a>
+                        <div class="social-stats">50K+ Members</div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Office Location Section -->
+        <section class="news" aria-labelledby="location-heading">
+            <div class="container">
+                <h2 id="location-heading">OUR BAMBOO FOREST</h2>
+                <div class="location-content">
+                    <div class="location-info">
+                        <div class="location-card">
+                            <h3>🏢 Panda X Studios</h3>
+                            <div class="address">
+                                <p><strong>Address:</strong><br>
+                                456 Adventure Lane<br>
+                                Chengdu, Sichuan 610000<br>
+                                China</p>
+
+                                <p><strong>Office Hours:</strong><br>
+                                Monday - Friday: 9:00 AM - 6:00 PM CST<br>
+                                Visitors welcome by appointment</p>
+
+                                <p><strong>Phone:</strong> +86 28 1234 5678<br>
+                                <strong>Fax:</strong> +86 28 1234 5679</p>
+                            </div>
+
+                            <div class="office-features">
+                                <h4>🌟 What makes our office special:</h4>
+                                <ul>
+                                    <li>🎮 Game testing lab with latest devices</li>
+                                    <li>🎨 Creative spaces for artists and designers</li>
+                                    <li>🐼 Panda-themed meeting rooms</li>
+                                    <li>🌱 Bamboo garden for inspiration</li>
+                                    <li>☕ Gaming cafe for community events</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="location-visual">
+                        <div class="office-image-container">
+                            <img src="../assets/images/screenshot1.jpg" alt="Panda X Studio Office" class="office-image">
+                            <div class="image-overlay">
+                                <h4>Our Creative Space</h4>
+                                <p>Where Panda X's adventures come to life</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Contact Form Section -->
+        <section class="legend-section" aria-labelledby="form-heading">
+            <div class="container">
+                <h2 id="form-heading">SEND US A MESSAGE</h2>
+                <div class="legend-content">
+                    <div class="legend-text">
+                        <div class="contact-form-container">
+                            <form class="contact-form" action="#" method="POST">
+                                <div class="form-group">
+                                    <label for="name">Your Name</label>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="subject">Subject</label>
+                                    <select id="subject" name="subject" required>
+                                        <option value="">Choose a topic...</option>
+                                        <option value="general">General Inquiry</option>
+                                        <option value="support">Technical Support</option>
+                                        <option value="bug">Bug Report</option>
+                                        <option value="feedback">Feedback</option>
+                                        <option value="partnership">Partnership</option>
+                                        <option value="press">Press Inquiry</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="message">Your Message</label>
+                                    <textarea id="message" name="message" rows="6" placeholder="Tell us about your adventure or how we can help..." required></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="newsletter" name="newsletter">
+                                        <span class="checkmark"></span>
+                                        Subscribe to Panda X newsletter for updates and exclusive content
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="btn-primary form-submit">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="legend-visual">
+                        <div class="panda-illustration">
+                            <div class="panda-circle">
+                                <div class="panda-emoji">📧</div>
+                            </div>
+                            <div class="journey-path">
+                                <div class="path-dot active"></div>
+                                <div class="path-dot active"></div>
+                                <div class="path-dot"></div>
+                                <div class="path-dot"></div>
+                                <div class="path-dot goal"></div>
+                            </div>
+                        </div>
+                        <div class="contact-benefits">
+                            <div class="benefit-item">
+                                <div class="benefit-icon">⚡</div>
+                                <p>Quick Response</p>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">🎯</div>
+                                <p>Direct to Team</p>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">🔒</div>
+                                <p>Secure & Private</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer>
+    <footer role="contentinfo">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>PANDA X</h3>
-                    <p>Guide Panda X home through puzzles, pitfalls, and possibilities in this unique adventure.</p>
+                    <p>Guide Panda X home through puzzles, pitfalls, and possibilities in this unique adventure that will captivate your imagination.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
@@ -164,10 +347,10 @@
                 <div class="footer-section">
                     <h4>Connect</h4>
                     <div class="social-links">
-                        <a href="#">Twitter</a>
-                        <a href="#">Facebook</a>
-                        <a href="#">Instagram</a>
-                        <a href="#">YouTube</a>
+                        <a href="#" aria-label="Follow us on Twitter">Twitter</a>
+                        <a href="#" aria-label="Follow us on Facebook">Facebook</a>
+                        <a href="#" aria-label="Follow us on Instagram">Instagram</a>
+                        <a href="#" aria-label="Subscribe on YouTube">YouTube</a>
                     </div>
                 </div>
             </div>
@@ -178,5 +361,310 @@
     </footer>
 
     <script src="../js/main.js"></script>
+
+    <style>
+        .contact-info {
+            background: var(--glass-bg);
+            padding: 1rem;
+            border-radius: var(--border-radius-sm);
+            margin: 1rem 0;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-info strong {
+            color: var(--text-blue);
+            font-size: 1.1rem;
+            display: block;
+            text-align: center;
+        }
+
+        .contact-btn {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .highlight-card {
+            border: 2px solid rgba(59, 130, 246, 0.4);
+            background: var(--glass-hover);
+        }
+
+        .support-hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .hours-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition-bounce);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .hours-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-large);
+        }
+
+        .hours-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .hours-info {
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .hours-info p {
+            margin-bottom: 0.75rem;
+            color: var(--text-readable);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .status-indicator.live {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+        }
+
+        .status-indicator.available {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: statusPulse 2s ease-in-out infinite;
+        }
+
+        .status-indicator.live .status-dot {
+            background: #22c55e;
+        }
+
+        .status-indicator.available .status-dot {
+            background: #3b82f6;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .social-btn {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .social-stats {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .location-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+            margin-top: 3rem;
+        }
+
+        .location-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .location-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .address p {
+            margin-bottom: 1rem;
+            color: var(--text-readable);
+            line-height: 1.6;
+        }
+
+        .office-features {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .office-features h4 {
+            color: var(--text-blue);
+            margin-bottom: 1rem;
+        }
+
+        .office-features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .office-features li {
+            padding: 0.5rem 0;
+            color: var(--text-readable);
+        }
+
+        .office-image-container {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-large);
+        }
+
+        .office-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .image-overlay h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-form-container {
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .contact-form {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-sm);
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--text-blue);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+
+        .checkbox-label {
+            display: flex !important;
+            align-items: flex-start;
+            gap: 0.75rem;
+            cursor: pointer;
+            color: var(--text-readable) !important;
+            font-weight: 400 !important;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            width: auto !important;
+            margin: 0;
+        }
+
+        .form-submit {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .contact-benefits {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .benefit-item {
+            text-align: center;
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-item p {
+            color: var(--text-readable);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .location-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .support-hours-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-benefits {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+    </style>
 </body>
 </html>
