@@ -73,6 +73,6 @@ def not_found(e):
 if __name__ == '__main__':
     print("\n🟢 Shadow Realm Server Running")
     print("✅ Now supports: /, /index.html, /about.html, etc.")
-    print("🌐 Visit: http://localhost:5000")
+    print("🌐 Visit: http://localhost:8000")
     print("🛑 Press Ctrl+C to stop\n")
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    app.run(host='0.0.0.0', port=8000, debug=False)

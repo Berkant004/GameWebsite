@@ -5,21 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Gameplay - Panda X</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="icon" href="../assets/images/icon.png" type="image/png">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/gameplay.css">
+    <link rel="icon" href="assets/images/icon.png" type="image/png">
 
-    <!-- Google Fonts for Premium Gaming Experience -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poppins:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Skip to content for accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
-
-    <!-- Loading indicator -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">LOADING ADVENTURE...</div>
-    </div>
 
     <!-- Floating particles background -->
     <div class="particles-container" id="particlesContainer"></div>
@@ -28,7 +23,6 @@
     <header role="banner">
         <div class="container">
             <div class="logo">
-                <img src="../assets/images/game-logo.png" alt="Panda X Logo" class="game-logo" loading="lazy">
                 <h1>PANDA X</h1>
             </div>
 
@@ -41,7 +35,7 @@
 
             <nav role="navigation" aria-label="Main navigation">
                 <ul>
-                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="gameplay.html" class="active" aria-current="page">Gameplay</a></li>
                     <li><a href="download.html">Download</a></li>
@@ -54,146 +48,263 @@
     <!-- Main Content -->
     <main id="main-content">
         <!-- Hero Section -->
-        <section class="hero hero-about" role="banner">
+        <section class="hero hero-gameplay" role="banner">
             <div class="hero-content">
                 <div class="container">
-                    <h1>DISCOVER THE MECHANICS SHAPING PANDA X'S JOURNEY</h1>
-                    <p>Master the art of puzzle-solving and guide Panda X through an epic adventure filled with challenges, rewards, and endless possibilities.</p>
+                    <h1 class="hero-title">MASTER THE ADVENTURE</h1>
+                    <p>Discover the mechanics shaping Panda X's journey. Master puzzle-solving and guide our hero through an epic adventure filled with challenges, rewards, and endless possibilities.</p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Cities</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Puzzles</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">10+</div>
+                            <div class="stat-label">Mini Games</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="hero-overlay"></div>
         </section>
 
         <!-- Core Mechanics Section -->
-        <section class="features" id="core-mechanics" aria-labelledby="mechanics-heading">
+        <section class="mechanics-section" id="core-mechanics" aria-labelledby="mechanics-heading">
             <div class="container">
-                <h2 id="mechanics-heading">CORE MECHANICS</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon" aria-hidden="true">🐼</div>
+                <h2 id="mechanics-heading" class="section-title">CORE MECHANICS</h2>
+                <div class="mechanics-grid">
+                    <div class="mechanic-card">
+                        <div class="mechanic-icon" aria-hidden="true">🎯</div>
                         <h3>Target: The Panda Wagon</h3>
-                        <p>Make sure the ball reaches Panda X in the wagon. Accuracy meets strategy at every level.</p>
+                        <p>Make sure the ball reaches Panda X in the wagon. Precision and strategy combine at every level to create the perfect shot.</p>
+                        <div class="mechanic-details">
+                            <span class="detail-tag">Accuracy</span>
+                            <span class="detail-tag">Strategy</span>
+                        </div>
                     </div>
-                    <div class="feature-card">
-                        <div class="feature-icon" aria-hidden="true">🎮</div>
-                        <h3>Mini Games for Extra Rewards</h3>
-                        <p>Take a break from the main journey with fun mini games and earn special items to customize or boost your experience.</p>
+                    <div class="mechanic-card">
+                        <div class="mechanic-icon" aria-hidden="true">🧩</div>
+                        <h3>Physics-Based Puzzles</h3>
+                        <p>Navigate through obstacles using realistic physics. Each puzzle requires creative thinking and perfect timing to master.</p>
+                        <div class="mechanic-details">
+                            <span class="detail-tag">Physics</span>
+                            <span class="detail-tag">Logic</span>
+                        </div>
                     </div>
-                    <div class="feature-card">
-                        <div class="feature-icon" aria-hidden="true">🧠</div>
-                        <h3>Obstacle-Based Progression</h3>
-                        <p>Each city hides unique puzzles and obstacles. Overcome them using logic, timing, or quick reactions.</p>
+                    <div class="mechanic-card">
+                        <div class="mechanic-icon" aria-hidden="true">🎮</div>
+                        <h3>Mini Games & Rewards</h3>
+                        <p>Take breaks with fun mini games and earn special items to customize your experience and boost your progress.</p>
+                        <div class="mechanic-details">
+                            <span class="detail-tag">Rewards</span>
+                            <span class="detail-tag">Variety</span>
+                        </div>
                     </div>
-                    <div class="feature-card">
-                        <div class="feature-icon" aria-hidden="true">✈️</div>
+                    <div class="mechanic-card">
+                        <div class="mechanic-icon" aria-hidden="true">🗺️</div>
                         <h3>World Tour Journey</h3>
-                        <p>Travel across a stylized world map and unlock new cities, each with its own theme, story, and mechanics.</p>
+                        <p>Travel across a beautifully crafted world map, unlocking new cities with unique themes, stories, and mechanics.</p>
+                        <div class="mechanic-details">
+                            <span class="detail-tag">Exploration</span>
+                            <span class="detail-tag">Progression</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Play Section -->
+        <section class="howto-section" aria-labelledby="howto-heading">
+            <div class="container">
+                <h2 id="howto-heading" class="section-title">HOW TO PLAY</h2>
+                <div class="howto-content">
+                    <div class="howto-steps">
+                        <div class="step-card" data-step="1">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="step-icon">🎯</div>
+                                <h3>Aim & Launch</h3>
+                                <p>Carefully aim and launch the ball toward Panda X's wagon. Precision is your key to success in every level.</p>
+                            </div>
+                        </div>
+                        <div class="step-card" data-step="2">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="step-icon">⚡</div>
+                                <h3>Use Physics</h3>
+                                <p>Navigate through obstacles using realistic physics interactions. Every surface and angle affects your trajectory.</p>
+                            </div>
+                        </div>
+                        <div class="step-card" data-step="3">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="step-icon">🌟</div>
+                                <h3>Collect & Unlock</h3>
+                                <p>Gather rewards, unlock mini-games, and customize your experience as you progress through the adventure.</p>
+                            </div>
+                        </div>
+                        <div class="step-card" data-step="4">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="step-icon">🏆</div>
+                                <h3>Compete & Connect</h3>
+                                <p>Join global leaderboards, chat with players worldwide, and share your achievements with the community.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="howto-visual">
+                        <div class="gameplay-demo">
+                            <div class="demo-screen">
+                                <div class="demo-panda">🐼</div>
+                                <div class="demo-ball"></div>
+                                <div class="demo-trajectory"></div>
+                                <div class="demo-obstacles">
+                                    <div class="obstacle obstacle-1"></div>
+                                    <div class="obstacle obstacle-2"></div>
+                                    <div class="obstacle obstacle-3"></div>
+                                </div>
+                            </div>
+                            <div class="demo-controls">
+                                <button class="demo-btn" id="playDemo">▶ Watch Demo</button>
+                                <div class="demo-progress">
+                                    <div class="progress-bar"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Game Systems Section -->
-        <section class="vision-section" aria-labelledby="systems-heading">
+        <section class="systems-section" aria-labelledby="systems-heading">
             <div class="container">
-                <h2 id="systems-heading">GAME SYSTEMS</h2>
-                <div class="vision-grid">
-                    <div class="vision-card primary">
-                        <div class="vision-icon">⚡</div>
-                        <h3>Physics Puzzle System</h3>
-                        <p>Physics-based interactions challenge creativity and timing. Every movement matters as you navigate through complex puzzles.</p>
-                        <div class="vision-accent"></div>
+                <h2 id="systems-heading" class="section-title">GAME SYSTEMS</h2>
+                <div class="systems-grid">
+                    <div class="system-card primary">
+                        <div class="system-icon">⚡</div>
+                        <h3>Physics Engine</h3>
+                        <p>Advanced physics simulation creates realistic ball movement, bouncing, and interactions with every surface and obstacle.</p>
+                        <div class="system-features">
+                            <ul>
+                                <li>Realistic ball physics</li>
+                                <li>Dynamic obstacle interactions</li>
+                                <li>Gravity and momentum effects</li>
+                            </ul>
+                        </div>
+                        <div class="system-accent"></div>
                     </div>
-                    <div class="vision-card secondary">
-                        <div class="vision-icon">🎯</div>
-                        <h3>Reward Mini-Games</h3>
-                        <p>Optional mini-games offer bonus rewards, encouraging exploration beyond main levels and keeping gameplay fresh.</p>
-                        <div class="vision-accent"></div>
+                    <div class="system-card secondary">
+                        <div class="system-icon">🏆</div>
+                        <h3>Progression System</h3>
+                        <p>Unlock new cities, collect achievements, and customize your experience as you advance through Panda X's journey.</p>
+                        <div class="system-features">
+                            <ul>
+                                <li>City unlock progression</li>
+                                <li>Achievement system</li>
+                                <li>Customization options</li>
+                            </ul>
+                        </div>
+                        <div class="system-accent"></div>
                     </div>
-                    <div class="vision-card tertiary">
-                        <div class="vision-icon">📊</div>
-                        <h3>Dynamic Leaderboards</h3>
-                        <p>Compete globally in weekly rankings to climb the leaderboard and prove your skill against other players.</p>
-                        <div class="vision-accent"></div>
-                    </div>
-                    <div class="vision-card primary">
-                        <div class="vision-icon">💬</div>
-                        <h3>Live Global Chat</h3>
-                        <p>Connect instantly with players around the world. Make friends, share tips, or just enjoy the community vibe.</p>
-                        <div class="vision-accent"></div>
+                    <div class="system-card tertiary">
+                        <div class="system-icon">👥</div>
+                        <h3>Social Features</h3>
+                        <p>Connect with players globally through live chat, compete in weekly leaderboards, and share your progress.</p>
+                        <div class="system-features">
+                            <ul>
+                                <li>Global live chat</li>
+                                <li>Weekly leaderboards</li>
+                                <li>Friend system</li>
+                            </ul>
+                        </div>
+                        <div class="system-accent"></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Gameplay Flow Section -->
-        <section class="legend-section" aria-labelledby="flow-heading">
+        <!-- Features Showcase Section -->
+        <section class="features-section" aria-labelledby="features-heading">
             <div class="container">
-                <h2 id="flow-heading">HOW TO PLAY</h2>
-                <div class="legend-content">
-                    <div class="legend-text">
-                        <div class="text-block">
-                            <div class="text-icon">🎯</div>
-                            <p><strong>Step 1:</strong> Aim carefully and launch the ball toward Panda X's wagon. Precision is key to success.</p>
-                        </div>
-                        <div class="text-block">
-                            <div class="text-icon">🧩</div>
-                            <p><strong>Step 2:</strong> Navigate through obstacles using physics-based interactions. Each puzzle requires creative thinking.</p>
-                        </div>
-                        <div class="text-block">
-                            <div class="text-icon">🌟</div>
-                            <p><strong>Step 3:</strong> Collect rewards and unlock mini-games to enhance your gaming experience.</p>
-                        </div>
-                        <div class="text-block">
-                            <div class="text-icon">🗺️</div>
-                            <p><strong>Step 4:</strong> Progress through different cities, each with unique themes and challenges.</p>
-                        </div>
-                        <div class="text-block">
-                            <div class="text-icon">👥</div>
-                            <p><strong>Step 5:</strong> Connect with other players, compete in leaderboards, and share your achievements.</p>
-                        </div>
-                    </div>
-                    <div class="legend-visual">
-                        <div class="panda-illustration">
-                            <div class="panda-circle">
-                                <div class="panda-emoji">🎮</div>
+                <h2 id="features-heading" class="section-title">GAMEPLAY HIGHLIGHTS</h2>
+                <div class="features-showcase">
+                    <div class="feature-highlight">
+                        <div class="feature-media">
+                            <img src="assets/images/screenshot1.jpg" alt="Physics-based gameplay demonstration" class="feature-image">
+                            <div class="media-overlay">
+                                <div class="play-button">▶</div>
+                                <p>Watch Physics Demo</p>
                             </div>
-                            <div class="journey-path">
-                                <div class="path-dot active"></div>
-                                <div class="path-dot active"></div>
-                                <div class="path-dot active"></div>
-                                <div class="path-dot"></div>
-                                <div class="path-dot goal"></div>
+                        </div>
+                        <div class="feature-info">
+                            <div class="feature-badge">PHYSICS ENGINE</div>
+                            <h3>Realistic Ball Physics</h3>
+                            <p>Experience true-to-life ball physics as you navigate through challenging obstacles. Every bounce, roll, and collision feels natural and responsive, creating an immersive puzzle-solving experience.</p>
+                            <div class="feature-stats">
+                                <div class="stat">
+                                    <span class="stat-value">60 FPS</span>
+                                    <span class="stat-label">Smooth Physics</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">100+</span>
+                                    <span class="stat-label">Obstacle Types</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Features Section -->
-        <section class="news" aria-labelledby="features-heading">
-            <div class="container">
-                <h2 id="features-heading">GAMEPLAY FEATURES</h2>
-                <div class="news-grid">
-                    <article class="news-card">
-                        <div class="news-date">PHYSICS ENGINE</div>
-                        <h3>Realistic Ball Physics</h3>
-                        <p>Experience true-to-life ball physics as you navigate through challenging obstacles and perfect your aim.</p>
-                        <a href="#" class="read-more">Learn More</a>
-                    </article>
-                    <article class="news-card">
-                        <div class="news-date">PROGRESSION</div>
-                        <h3>City Unlock System</h3>
-                        <p>Journey through beautifully crafted cities, each offering unique challenges and visual themes to explore.</p>
-                        <a href="#" class="read-more">Learn More</a>
-                    </article>
-                    <article class="news-card">
-                        <div class="news-date">SOCIAL</div>
-                        <h3>Community Features</h3>
-                        <p>Chat with players worldwide, share strategies, and compete in weekly challenges to prove your skills.</p>
-                        <a href="#" class="read-more">Learn More</a>
-                    </article>
+                    <div class="feature-highlight reverse">
+                        <div class="feature-media">
+                            <img src="assets/images/screenshot2.jpg" alt="City progression system" class="feature-image">
+                            <div class="media-overlay">
+                                <div class="play-button">▶</div>
+                                <p>Explore Cities</p>
+                            </div>
+                        </div>
+                        <div class="feature-info">
+                            <div class="feature-badge">PROGRESSION</div>
+                            <h3>Dynamic City Exploration</h3>
+                            <p>Journey through beautifully crafted cities, each with unique architectural themes, cultural elements, and progressive difficulty curves that keep you engaged and challenged.</p>
+                            <div class="feature-stats">
+                                <div class="stat">
+                                    <span class="stat-value">50+</span>
+                                    <span class="stat-label">Unique Cities</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">500+</span>
+                                    <span class="stat-label">Total Levels</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-highlight">
+                        <div class="feature-media">
+                            <img src="assets/images/screenshot3.jpg" alt="Social features and community" class="feature-image">
+                            <div class="media-overlay">
+                                <div class="play-button">▶</div>
+                                <p>Join Community</p>
+                            </div>
+                        </div>
+                        <div class="feature-info">
+                            <div class="feature-badge">SOCIAL</div>
+                            <h3>Global Community</h3>
+                            <p>Connect with fellow adventurers worldwide through live chat, compete in weekly challenges, and share strategies to help Panda X reach new destinations together.</p>
+                            <div class="feature-stats">
+                                <div class="stat">
+                                    <span class="stat-value">10K+</span>
+                                    <span class="stat-label">Active Players</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">24/7</span>
+                                    <span class="stat-label">Live Chat</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -204,35 +315,67 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>PANDA X</h3>
-                    <p>Guide Panda X home through puzzles, pitfalls, and possibilities in this unique adventure that will captivate your imagination.</p>
+                    <div class="footer-logo">
+                        <h3>PANDA X</h3>
+                        <p>Embark on an unforgettable adventure where every path leads to discovery. Guide Panda X through enchanting worlds filled with mystery and wonder.</p>
+                    </div>
                 </div>
+
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
+                    <h4>Game</h4>
                     <ul>
-                        <li><a href="../index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="gameplay.html">Gameplay</a></li>
                         <li><a href="download.html">Download</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="gameplay.html">How to Play</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="#features">Features</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-section">
-                    <h4>Connect</h4>
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#help">Help Center</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#updates">Game Updates</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <p>Follow Panda X for the latest updates, tips, and community highlights!</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Follow us on Twitter">Twitter</a>
-                        <a href="#" aria-label="Follow us on Facebook">Facebook</a>
-                        <a href="#" aria-label="Follow us on Instagram">Instagram</a>
-                        <a href="#" aria-label="Subscribe on YouTube">YouTube</a>
+                        <a href="https://twitter.com/pandax" aria-label="Follow us on Twitter" target="_blank" rel="noopener noreferrer">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </a>
+                        <a href="https://instagram.com/pandax" aria-label="Follow us on Instagram" target="_blank" rel="noopener noreferrer">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="https://youtube.com/pandax" aria-label="Subscribe to our YouTube channel" target="_blank" rel="noopener noreferrer">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                        <a href="https://facebook.com/pandax" aria-label="Like us on Facebook" target="_blank" rel="noopener noreferrer">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
+
             <div class="footer-bottom">
-                <p>&copy; 2024 Panda X. All rights reserved. Embark on an adventure of a lifetime.</p>
+                <p>&copy; 2024 Panda X Game. All rights reserved. | Privacy Policy | Terms of Service</p>
             </div>
         </div>
     </footer>
 
-    <script src="../js/main.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/gameplay.js"></script>
 </body>
 </html>

@@ -5,24 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Panda X - Official Game Website</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
     <link rel="icon" href="assets/images/icon.png" type="image/png">
 
     <!-- Preload critical resources -->
     <link rel="preload" href="assets/images/hero-bg.jpg" as="image">
 
-    <!-- Google Fonts for Premium Gaming Experience -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poppins:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Skip to content for accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
-
-    <!-- Loading indicator -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">LOADING ADVENTURE...</div>
-    </div>
 
     <!-- Floating particles background -->
     <div class="particles-container" id="particlesContainer"></div>
@@ -31,7 +26,6 @@
     <header role="banner">
         <div class="container">
             <div class="logo">
-                <img src="assets/images/game-logo.png" alt="Panda X Logo" class="game-logo" loading="lazy">
                 <h1>PANDA X</h1>
             </div>
 
@@ -45,10 +39,10 @@
             <nav role="navigation" aria-label="Main navigation">
                 <ul>
                     <li><a href="index.html" class="active" aria-current="page">Home</a></li>
-                    <li><a href="pages/about.html">About</a></li>
-                    <li><a href="pages/gameplay.html">Gameplay</a></li>
-                    <li><a href="pages/download.html">Download</a></li>
-                    <li><a href="pages/contact.html">Contact</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="gameplay.html">Gameplay</a></li>
+                    <li><a href="download.html">Download</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -60,10 +54,10 @@
         <section class="hero" role="banner">
             <div class="hero-content">
                 <div class="container">
-                    <h1>PANDA X AWAITS YOUR PATH</h1>
+                    <h1 class="hero-title">PANDA X AWAITS YOUR PATH</h1>
                     <p>Every line you draw writes a new story — guide Panda X home through puzzles, pitfalls, and possibilities in this epic adventure.</p>
                     <div class="cta-buttons">
-                        <a href="pages/download.html" class="btn-primary">START JOURNEY</a>
+                        <a href="download.html" class="btn-primary">START JOURNEY</a>
                         <a href="#features" class="btn-secondary">LEARN MORE</a>
                     </div>
                 </div>
@@ -74,7 +68,7 @@
         <!-- Features Section -->
         <section class="features" id="features" aria-labelledby="features-heading">
             <div class="container">
-                <h2 id="features-heading">WHY THIS GAME?</h2>
+                <h2 id="features-heading" class="section-title">WHY THIS GAME?</h2>
                 <div class="features-grid">
                     <div class="feature-card">
                         <div class="feature-icon" aria-hidden="true">🌍</div>
@@ -103,9 +97,9 @@
         <!-- Trailer Section -->
         <section class="trailer" id="trailer" aria-labelledby="trailer-heading">
             <div class="container">
-                <h2 id="trailer-heading">PANDA X JOURNEY TRAILER</h2>
+                <h2 id="trailer-heading" class="section-title">PANDA X JOURNEY TRAILER</h2>
                 <div class="video-container">
-                    <video controls preload="metadata" poster="assets/images/screenshot1.jpg">
+                    <video controls preload="metadata" poster="assets/images/img.png">
                         <source src="assets/videos/video.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -114,58 +108,83 @@
             </div>
         </section>
 
-        <!-- Screenshots Section -->
-        <section class="screenshots" aria-labelledby="gallery-heading">
+        <!-- FIXED Screenshots Section - Replace your existing screenshots section with this -->
+        <section class="screenshots" aria-labelledby="gallery-heading" style="display: block !important;">
             <div class="container">
-                <h2 id="gallery-heading">ADVENTURE GALLERY</h2>
-                <div class="screenshot-scroll-container" role="region" aria-label="Game screenshots" tabindex="0">
-                    <div class="screenshot-scroll-wrapper">
-                        <div class="screenshot-item">
-                            <img src="assets/images/img.png" alt="Panda X in Bamboo Forest" loading="lazy">
+                <h2 id="gallery-heading" class="section-title">ADVENTURE GALLERY</h2>
+                <div class="screenshot-scroll-container" role="region" aria-label="Game screenshots" tabindex="0" style="display: block !important; min-height: 240px;">
+                    <div class="screenshot-scroll-wrapper" style="display: flex !important;">
+                        <div class="screenshot-item" style="display: block !important;">
+                            <!-- OPTION 1: If you have the image files -->
+                            <img src="assets/images/img.png" alt="Panda X Main Adventure" loading="lazy"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <!-- Fallback placeholder -->
+                            <div class="image-placeholder" style="display: none; width: 100%; height: 100%; background: linear-gradient(45deg, #1e293b, #334155); color: #cbd5e1; font-weight: 600; align-items: center; justify-content: center;">
+                                Screenshot 1
+                            </div>
                         </div>
-                        <div class="screenshot-item">
-                            <img src="assets/images/img_1.png" alt="Panda X Solving Puzzle" loading="lazy">
+                        <div class="screenshot-item" style="display: block !important;">
+                            <img src="assets/images/img_1.png" alt="Panda X Puzzle Challenge" loading="lazy"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="image-placeholder" style="display: none; width: 100%; height: 100%; background: linear-gradient(45deg, #1e293b, #334155); color: #cbd5e1; font-weight: 600; align-items: center; justify-content: center;">
+                                Screenshot 2
+                            </div>
                         </div>
-                        <div class="screenshot-item">
-                            <img src="assets/images/img_2.png" alt="Panda X with Friends" loading="lazy">
-                        </div>
-                        <div class="screenshot-item">
-                            <img src="assets/images/img.png" alt="Panda X Adventure Scene" loading="lazy">
-                        </div>
-                        <div class="screenshot-item">
-                            <img src="assets/images/img_1.png" alt="Panda X Puzzle Challenge" loading="lazy">
+                        <div class="screenshot-item" style="display: block !important;">
+                            <img src="assets/images/img_2.png" alt="Panda X Epic Journey" loading="lazy"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="image-placeholder" style="display: none; width: 100%; height: 100%; background: linear-gradient(45deg, #1e293b, #334155); color: #cbd5e1; font-weight: 600; align-items: center; justify-content: center;">
+                                Screenshot 3
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="auto-slide-indicator">
-                    <div class="auto-slide-progress"></div>
                 </div>
             </div>
         </section>
 
-        <!-- News Section -->
-        <section class="news" aria-labelledby="news-heading">
+        <!-- Community Section -->
+        <section class="community" aria-labelledby="community-heading">
             <div class="container">
-                <h2 id="news-heading">LATEST ADVENTURES</h2>
-                <div class="news-grid">
-                    <article class="news-card">
-                        <div class="news-date">NOV 15, 2024</div>
-                        <h3>New City "Bamboo Metropolis" Unveiled</h3>
-                        <p>Explore the towering bamboo skyscrapers and solve the mysteries of the ancient panda civilization in our biggest update yet.</p>
-                        <a href="#" class="read-more">Read More</a>
-                    </article>
-                    <article class="news-card">
-                        <div class="news-date">NOV 1, 2024</div>
-                        <h3>Weekly Challenge: Mountain Climb Event</h3>
-                        <p>Compete in the ultimate climbing challenge and earn exclusive panda-themed rewards that showcase your mastery!</p>
-                        <a href="#" class="read-more">Read More</a>
-                    </article>
-                    <article class="news-card">
-                        <div class="news-date">OCT 20, 2024</div>
-                        <h3>Community Spotlight: Player Creations</h3>
-                        <p>Amazing fan art and level designs from our global Panda X community. Check out these incredible creations!</p>
-                        <a href="#" class="read-more">Read More</a>
-                    </article>
+                <h2 id="community-heading" class="section-title">JOIN THE ADVENTURE</h2>
+                <div class="community-content">
+                    <div class="community-text">
+                        <h3>Be Part of the Panda X Family</h3>
+                        <p>Connect with thousands of adventurers worldwide! Share your achievements, discover new strategies, and stay updated with the latest game content and events.</p>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-number">50K+</div>
+                                <div class="stat-label">Active Players</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">1M+</div>
+                                <div class="stat-label">Puzzles Solved</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">25+</div>
+                                <div class="stat-label">Worlds to Explore</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section class="download-cta" aria-labelledby="download-heading">
+            <div class="container">
+                <div class="download-content">
+                    <h2 id="download-heading" class="section-title">READY TO BEGIN?</h2>
+                    <p>Start your epic journey with Panda X today. Available on all platforms.</p>
+                    <div class="download-buttons">
+                        <a href="download.html" class="btn-primary">DOWNLOAD NOW</a>
+                        <a href="gameplay.html" class="btn-secondary">WATCH GAMEPLAY</a>
+                    </div>
+                    <div class="platform-badges">
+                        <span class="platform-badge">Windows</span>
+                        <span class="platform-badge">macOS</span>
+                        <span class="platform-badge">iOS</span>
+                        <span class="platform-badge">Android</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -176,35 +195,68 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>PANDA X</h3>
-                    <p>Guide Panda X home through puzzles, pitfalls, and possibilities in this unique adventure that will captivate your imagination.</p>
+                    <div class="footer-logo">
+                        <h3>PANDA X</h3>
+                        <p>Embark on an unforgettable adventure where every path leads to discovery. Guide Panda X through enchanting worlds filled with mystery and wonder.</p>
+                    </div>
                 </div>
+
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
+                    <h4>Game</h4>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="pages/about.html">About</a></li>
-                        <li><a href="pages/gameplay.html">Gameplay</a></li>
-                        <li><a href="pages/download.html">Download</a></li>
-                        <li><a href="pages/contact.html">Contact</a></li>
+                        <li><a href="download.html">Download</a></li>
+                        <li><a href="gameplay.html">How to Play</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="#features">Features</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-section">
-                    <h4>Connect</h4>
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#help">Help Center</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#updates">Game Updates</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <p>Follow Panda X for the latest updates, tips, and community highlights!</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Follow us on Twitter">Twitter</a>
-                        <a href="#" aria-label="Follow us on Facebook">Facebook</a>
-                        <a href="#" aria-label="Follow us on Instagram">Instagram</a>
-                        <a href="#" aria-label="Subscribe on YouTube">YouTube</a>
+                        <a href="https://twitter.com/pandax" aria-label="Follow us on Twitter" target="_blank" rel="noopener noreferrer">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </a>
+                        <a href="https://instagram.com/pandax" aria-label="Follow us on Instagram" target="_blank" rel="noopener noreferrer">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="https://youtube.com/pandax" aria-label="Subscribe to our YouTube channel" target="_blank" rel="noopener noreferrer">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                        <a href="https://facebook.com/pandax" aria-label="Like us on Facebook" target="_blank" rel="noopener noreferrer">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
+
             <div class="footer-bottom">
-                <p>&copy; 2024 Panda X. All rights reserved. Embark on an adventure of a lifetime.</p>
+                <p>&copy; 2024 Panda X Game. All rights reserved. | Privacy Policy | Terms of Service</p>
             </div>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <!-- Scripts -->
+    <script src="js/common.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>
