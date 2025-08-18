@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // Enhanced header with glassmorphism
 function initializeHeader() {
     const header = document.querySelector('header');
+    if (!header) return;
+
     let lastScrollY = window.scrollY;
     let ticking = false;
 
@@ -314,25 +316,24 @@ function initializeStatCounters() {
         const suffix = suffixes[index];
         let current = 0;
         const increment = target / 100;
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                current = target;
-                clearInterval(timer);
-            }
-
-            if (target >= 1000) {
-                stat.textContent = (current / 1000).toFixed(1) + 'K+';
-            } else {
-                stat.textContent = Math.floor(current) + '+';
-            }
-        }, 30);
 
         // Start animation when visible
         const counterObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Animation is already set up above
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+
+                        if (target >= 1000) {
+                            stat.textContent = (current / 1000).toFixed(1) + 'K+';
+                        } else {
+                            stat.textContent = Math.floor(current) + '+';
+                        }
+                    }, 30);
                     counterObserver.unobserve(entry.target);
                 }
             });
